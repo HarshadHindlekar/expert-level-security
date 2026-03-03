@@ -88,7 +88,7 @@ const CloseIcon = () => (
 const primaryNavItems: NavItem[] = [
   { label: 'Dashboard', href: '/dashboard', icon: <DashboardIcon /> },
   { label: 'Projects', href: '/projects', icon: <ProjectsIcon /> },
-  { label: 'Scans', href: '/dashboard', icon: <ScansIcon /> },
+  { label: 'Scans', href: '/scan', icon: <ScansIcon /> },
   { label: 'Schedule', href: '/schedule', icon: <ScheduleIcon /> },
 ];
 

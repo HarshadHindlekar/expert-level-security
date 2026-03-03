@@ -10,7 +10,7 @@ import { ScanStatusBar } from '@/components/scan/ScanStatusBar';
 import { Modal } from '@/components/ui/Modal';
 import { Button } from '@/components/ui/Button';
 import { useToast } from '@/components/ui/Toast';
-import { mockScanDetail } from '@/lib/mock-data';
+import { useSelectedScanDetail } from '@/lib/hooks/useSelectedScan';
 
 const ExportIcon = () => (
   <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
@@ -29,34 +29,39 @@ const StopIcon = () => (
 const metaIcons: Record<string, React.ReactNode> = {
   'Scan Type': (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="11" cy="11" r="8" /><line x1="21" y1="21" x2="16.65" y2="16.65" />
+      <circle cx="11" cy="11" r="8" />
+      <line x1="21" y1="21" x2="16.65" y2="16.65" />
     </svg>
   ),
-  'Targets': (
+  Targets: (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="12" cy="12" r="10" /><circle cx="12" cy="12" r="6" /><circle cx="12" cy="12" r="2" />
+      <circle cx="12" cy="12" r="10" />
+      <circle cx="12" cy="12" r="6" />
+      <circle cx="12" cy="12" r="2" />
     </svg>
   ),
   'Started At': (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <circle cx="12" cy="12" r="10" /><polyline points="12 6 12 12 16 14" />
+      <circle cx="12" cy="12" r="10" />
+      <polyline points="12 6 12 12 16 14" />
     </svg>
   ),
-  'Credentials': (
+  Credentials: (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
       <path d="M7 11V7a5 5 0 0 1 10 0v4" />
     </svg>
   ),
-  'Files': (
+  Files: (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
       <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z" />
       <polyline points="14 2 14 8 20 8" />
     </svg>
   ),
-  'Checklists': (
+  Checklists: (
     <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-      <polyline points="9 11 12 14 22 4" /><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
+      <polyline points="9 11 12 14 22 4" />
+      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11" />
     </svg>
   ),
 };
@@ -66,7 +71,7 @@ function ScanDetailContent() {
   const [stopModalOpen, setStopModalOpen] = useState(false);
   const [stopped, setStopped] = useState(false);
 
-  const detail = mockScanDetail;
+  const { detail } = useSelectedScanDetail();
 
   const metaItems = [
     { label: 'Scan Type', value: detail.type === 'Greybox' ? 'Grey Box' : 'Black Box' },
@@ -113,12 +118,8 @@ function ScanDetailContent() {
       topBarActions={topBarActions}
     >
       <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
-        {/* Scan progress header */}
-        <div
-          className="px-6 py-5 flex-shrink-0 bg-[var(--bg-card)] border-b border-[var(--border-color)]"
-        >
+        <div className="px-6 py-5 flex-shrink-0 bg-[var(--bg-card)] border-b border-[var(--border-color)]">
           <div className="flex items-center gap-6 mb-5">
-            {/* Circular progress */}
             <div className="flex-shrink-0">
               <CircularProgress
                 value={detail.progress}
@@ -129,16 +130,12 @@ function ScanDetailContent() {
               />
             </div>
 
-            {/* Step tracker */}
             <div className="flex-1 min-w-0">
               <StepTracker steps={detail.steps} currentStep={detail.currentStep} />
             </div>
           </div>
 
-          {/* Metadata row */}
-          <div
-            className="flex items-center overflow-x-auto no-scrollbar border-t border-[var(--border-subtle)] pt-3.5 gap-0"
-          >
+          <div className="flex items-center overflow-x-auto no-scrollbar border-t border-[var(--border-subtle)] pt-3.5 gap-0">
             {metaItems.map((item, i) => (
               <React.Fragment key={item.label}>
                 {i > 0 && (
@@ -152,9 +149,7 @@ function ScanDetailContent() {
                     <span className="text-[var(--text-muted)]" aria-hidden="true">
                       {metaIcons[item.label]}
                     </span>
-                    <span className="text-xs whitespace-nowrap text-[var(--text-muted)]">
-                      {item.label}
-                    </span>
+                    <span className="text-xs whitespace-nowrap text-[var(--text-muted)]">{item.label}</span>
                   </div>
                   <span
                     className={
@@ -171,27 +166,19 @@ function ScanDetailContent() {
           </div>
         </div>
 
-        {/* Main split panel */}
         <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-4 p-4 overflow-hidden">
-          {/* Left: Console */}
           <div className="flex flex-col flex-1 min-w-0 min-h-0 min-h-[320px]">
-            <LiveConsole
-              logs={detail.consoleLogs}
-              verificationLoops={detail.verificationLoops}
-            />
+            <LiveConsole logs={detail.consoleLogs} verificationLoops={detail.verificationLoops} />
           </div>
 
-          {/* Right: Findings */}
           <div className="flex flex-col lg:w-[340px] w-full min-h-0 flex-shrink-0 min-h-[240px]">
             <FindingLog findings={detail.findings} />
           </div>
         </div>
 
-        {/* Status bar */}
         <ScanStatusBar detail={detail} />
       </div>
 
-      {/* Stop scan confirmation modal */}
       <Modal
         open={stopModalOpen}
         onClose={() => setStopModalOpen(false)}
@@ -234,6 +221,6 @@ function ScanDetailContent() {
   );
 }
 
-export default function ScanDetailPage() {
+export default function ScanPage() {
   return <ScanDetailContent />;
 }

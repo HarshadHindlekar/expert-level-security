@@ -6,6 +6,7 @@ import { type ScanEntry } from '@/lib/mock-data';
 import { StatusChip } from '@/components/ui/StatusChip';
 import { VulnBadges } from '@/components/ui/Badge';
 import { ProgressBar } from '@/components/ui/ProgressBar';
+import { useSelectedScanId } from '@/lib/hooks/useSelectedScan';
 
 interface ScanTableProps {
   scans: ScanEntry[];
@@ -13,9 +14,11 @@ interface ScanTableProps {
 
 export function ScanTable({ scans }: ScanTableProps) {
   const router = useRouter();
+  const { setSelectedScanId } = useSelectedScanId();
 
   function handleRowClick(id: string) {
-    router.push(`/scan/${id}`);
+    setSelectedScanId(id);
+    router.push('/scan');
   }
 
   function handleRowKeyDown(e: React.KeyboardEvent, id: string) {
