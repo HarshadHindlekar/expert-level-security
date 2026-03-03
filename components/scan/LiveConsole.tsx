@@ -110,14 +110,17 @@ function highlightLog(message: string): React.ReactNode[] {
 }
 
 function ActivityLog({ logs }: { logs: ConsoleLogEntry[] }) {
-  const bottomRef = useRef<HTMLDivElement>(null);
+  const containerRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    bottomRef.current?.scrollIntoView({ behavior: 'smooth' });
+    const el = containerRef.current;
+    if (!el) return;
+    el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' });
   }, [logs]);
 
   return (
     <div
+      ref={containerRef}
       className="flex-1 overflow-y-auto p-4 font-mono text-xs leading-relaxed space-y-3 scrollbar-thin bg-[#111] text-[#d4d4d4]"
       role="log"
       aria-live="polite"
@@ -149,7 +152,6 @@ function ActivityLog({ logs }: { logs: ConsoleLogEntry[] }) {
           </span>
         </div>
       ))}
-      <div ref={bottomRef} />
     </div>
   );
 }

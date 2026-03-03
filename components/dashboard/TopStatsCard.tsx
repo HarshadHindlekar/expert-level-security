@@ -27,7 +27,7 @@ const TrendDownIcon = () => (
 export function TopStatsCard({ label, count, change, trend, icon, color, colorBg }: TopStatsCardProps) {
   return (
     <div
-      className="flex flex-col gap-3 py-5 px-6 border-r border-b border-[var(--border-color)]"
+      className="flex flex-col gap-2 sm:gap-3 py-3 sm:py-5 px-4 sm:px-6 border-r border-b border-[var(--border-color)]"
     >
       {/* Top row: label + icon */}
       <div className="flex items-center justify-between">
@@ -35,7 +35,7 @@ export function TopStatsCard({ label, count, change, trend, icon, color, colorBg
           {label}
         </span>
         <div
-          className="w-9 h-9 rounded-xl flex items-center justify-center flex-shrink-0"
+          className="w-8 h-8 sm:w-9 sm:h-9 rounded-xl flex items-center justify-center flex-shrink-0"
           style={{ backgroundColor: colorBg, color }}
           aria-hidden="true"
         >
@@ -45,7 +45,7 @@ export function TopStatsCard({ label, count, change, trend, icon, color, colorBg
 
       {/* Count */}
       <span
-        className="text-4xl font-bold tabular-nums leading-none text-[var(--text-primary)]"
+        className="text-3xl sm:text-4xl font-bold tabular-nums leading-none text-[var(--text-primary)]"
       >
         {count}
       </span>
@@ -99,13 +99,13 @@ export function DashboardMetaBar({ org, owner, totalScans, scheduled, rescans, f
 
   return (
     <div
-      className="flex items-center overflow-x-auto no-scrollbar border-b border-[var(--border-color)] min-h-10 px-5 py-2.5"
+      className="flex items-center overflow-x-auto no-scrollbar border-b border-[var(--border-color)] min-h-8 sm:min-h-10 px-3 sm:px-5 py-2"
     >
       {items.map((item, i) => (
         <React.Fragment key={item.label}>
           {i > 0 && (
             <span
-              className="w-px h-3 flex-shrink-0 mx-4 bg-[var(--border-color)]"
+              className="w-px h-3 flex-shrink-0 mx-2 sm:mx-4 bg-[var(--border-color)]"
               aria-hidden="true"
             />
           )}

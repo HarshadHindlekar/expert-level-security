@@ -145,14 +145,16 @@ export function Sidebar() {
   return (
     <>
       {/* Mobile toggle */}
-      <button
-        className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-[var(--radius-sm)] shadow-[var(--shadow-md)] transition-colors cursor-pointer bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)]"
-        onClick={() => setMobileOpen((v) => !v)}
-        aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
-        aria-expanded={mobileOpen}
-      >
-        {mobileOpen ? <CloseIcon /> : <MenuIcon />}
-      </button>
+      {!mobileOpen && (
+        <button
+          className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-[var(--radius-sm)] shadow-[var(--shadow-md)] transition-colors cursor-pointer bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)]"
+          onClick={() => setMobileOpen(true)}
+          aria-label="Open navigation"
+          aria-expanded={false}
+        >
+          <MenuIcon />
+        </button>
+      )}
 
       {/* Mobile overlay */}
       {mobileOpen && (
@@ -189,6 +191,17 @@ export function Sidebar() {
             <span className="text-sm font-bold tracking-tight text-[var(--text-primary)]">APS Security</span>
             <span className="text-[10px] mt-0.5 text-[var(--text-muted)]">Pentest Platform</span>
           </div>
+
+          {mobileOpen && (
+            <button
+              className="md:hidden ml-auto w-9 h-9 flex items-center justify-center rounded-[var(--radius-sm)] transition-colors cursor-pointer hover:bg-[var(--bg-hover)] text-[var(--text-secondary)]"
+              onClick={() => setMobileOpen(false)}
+              aria-label="Close navigation"
+              aria-expanded={true}
+            >
+              <CloseIcon />
+            </button>
+          )}
         </div>
 
         {/* Primary nav */}

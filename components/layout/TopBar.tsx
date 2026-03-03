@@ -47,10 +47,10 @@ export function TopBar({ breadcrumbs = [], actions }: TopBarProps) {
 
   return (
     <header
-      className="flex items-center justify-between pl-14 pr-4 md:px-5 flex-shrink-0 h-14 bg-[var(--bg-sidebar)] border-b border-[var(--border-color)]"
+      className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2 sm:gap-0 pl-14 pr-4 md:px-5 flex-shrink-0 py-2 bg-[var(--bg-sidebar)] border-b border-[var(--border-color)]"
     >
       {/* Breadcrumbs */}
-      <nav className="flex items-center gap-1.5 text-sm" aria-label="Breadcrumb">
+      <nav className="flex items-center justify-end sm:justify-start gap-1.5 text-sm min-w-0 overflow-x-auto no-scrollbar w-full sm:w-auto" aria-label="Breadcrumb">
         <Link
           href="/dashboard"
           className="flex items-center gap-1 transition-colors hover:text-[var(--text-primary)] text-[var(--text-secondary)]"
@@ -82,7 +82,7 @@ export function TopBar({ breadcrumbs = [], actions }: TopBarProps) {
       </nav>
 
       {/* Right actions */}
-      <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0">
+      <div className="flex items-center gap-1.5 md:gap-2 flex-shrink-0 w-full sm:w-auto overflow-x-auto no-scrollbar">
         {/* Theme toggle */}
         <button
           onClick={toggleTheme}
@@ -93,7 +93,9 @@ export function TopBar({ breadcrumbs = [], actions }: TopBarProps) {
           {theme === 'dark' ? <SunIcon /> : <MoonIcon />}
         </button>
 
-        {actions}
+        <div className="flex items-center justify-end gap-1.5 md:gap-2 flex-wrap sm:flex-nowrap min-w-0">
+          {actions}
+        </div>
       </div>
     </header>
   );

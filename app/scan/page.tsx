@@ -118,24 +118,44 @@ function ScanDetailContent() {
       topBarActions={topBarActions}
     >
       <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
-        <div className="px-6 py-5 flex-shrink-0 bg-[var(--bg-card)] border-b border-[var(--border-color)]">
-          <div className="flex items-center gap-6 mb-5">
-            <div className="flex-shrink-0">
+        <div className="px-4 sm:px-6 py-3 sm:py-5 flex-shrink-0 bg-[var(--bg-card)] border-b border-[var(--border-color)]">
+          <div className="flex items-center gap-3 sm:gap-6 mb-2 sm:mb-5">
+            <div className="flex-shrink-0 sm:hidden">
               <CircularProgress
                 value={detail.progress}
-                size={100}
-                strokeWidth={7}
+                size={64}
+                strokeWidth={6}
+                label={`${detail.progress}%`}
+              />
+            </div>
+            <div className="flex-shrink-0 hidden sm:block">
+              <CircularProgress
+                value={detail.progress}
+                size={80}
+                strokeWidth={6}
                 label={`${detail.progress}%`}
                 sublabel="In Progress"
               />
             </div>
 
             <div className="flex-1 min-w-0">
-              <StepTracker steps={detail.steps} currentStep={detail.currentStep} />
+              <div className="sm:hidden flex items-center justify-between gap-2 min-w-0">
+                <span className="inline-flex items-center px-2 py-1 rounded-full text-[11px] font-semibold bg-[rgba(12,200,168,0.12)] text-[var(--accent)] truncate">
+                  {detail.steps[detail.currentStep] ?? '—'}
+                </span>
+                <span className="text-[11px] text-[var(--text-muted)] flex-shrink-0">
+                  Step {detail.currentStep + 1}/{detail.steps.length}
+                </span>
+              </div>
+              <div className="hidden sm:block overflow-x-auto no-scrollbar">
+                <div className="min-w-[520px]">
+                  <StepTracker steps={detail.steps} currentStep={detail.currentStep} />
+                </div>
+              </div>
             </div>
           </div>
 
-          <div className="flex items-center overflow-x-auto no-scrollbar border-t border-[var(--border-subtle)] pt-3.5 gap-0">
+          <div className="hidden sm:flex items-center overflow-x-auto no-scrollbar border-t border-[var(--border-subtle)] pt-3.5 gap-0">
             {metaItems.map((item, i) => (
               <React.Fragment key={item.label}>
                 {i > 0 && (
@@ -144,7 +164,7 @@ function ScanDetailContent() {
                     aria-hidden="true"
                   />
                 )}
-                <div className="flex flex-col gap-0.5 px-5 flex-shrink-0">
+                <div className="flex flex-col gap-0.5 px-3 sm:px-5 flex-shrink-0">
                   <div className="flex items-center gap-1.5">
                     <span className="text-[var(--text-muted)]" aria-hidden="true">
                       {metaIcons[item.label]}
@@ -166,12 +186,12 @@ function ScanDetailContent() {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-4 p-4 overflow-hidden">
-          <div className="flex flex-col flex-1 min-w-0 min-h-0 min-h-[320px]">
+        <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-3 sm:gap-4 p-3 sm:p-4 overflow-y-auto">
+          <div className="flex flex-col flex-1 min-w-0 min-h-0 min-h-[200px] sm:min-h-[320px]">
             <LiveConsole logs={detail.consoleLogs} verificationLoops={detail.verificationLoops} />
           </div>
 
-          <div className="flex flex-col lg:w-[340px] w-full min-h-0 flex-shrink-0 min-h-[240px]">
+          <div className="flex flex-col lg:w-[340px] w-full min-h-0 flex-shrink-0 min-h-[160px] sm:min-h-[240px]">
             <FindingLog findings={detail.findings} />
           </div>
         </div>

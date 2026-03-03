@@ -209,11 +209,9 @@ function DashboardContent() {
         </div>
 
         {/* Toolbar */}
-        <div
-          className="flex items-center gap-3 px-6 py-3 border-b border-[var(--border-color)]"
-        >
+        <div className="flex flex-col sm:flex-row sm:items-center gap-3 px-4 sm:px-6 py-3 border-b border-[var(--border-color)]">
           {/* Search */}
-          <div className="flex-1 min-w-0 max-w-sm relative">
+          <div className="flex-1 min-w-0 sm:max-w-sm relative">
             <span
               className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--text-muted)]"
               aria-hidden="true"
@@ -230,7 +228,7 @@ function DashboardContent() {
             />
           </div>
 
-          <div className="flex items-center gap-2 ml-auto flex-shrink-0">
+          <div className="flex items-center gap-2 sm:ml-auto flex-shrink-0 overflow-x-auto no-scrollbar">
             {/* Filter button */}
             <button
               onClick={() => setFilterModalOpen(true)}
