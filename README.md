@@ -33,7 +33,7 @@ Open [http://localhost:3000](http://localhost:3000) — it auto-redirects to `/l
 |---|---|
 | `/login` | Sign-up page with split layout, form validation, social buttons |
 | `/dashboard` | Scan list with severity stats, search/filter, new scan |
-| `/scan/[id]` | Active scan detail with live console, findings, step tracker |
+| `/scan` | Active scan detail with live console, findings, step tracker (no route params) |
 
 ## Architecture
 
@@ -54,7 +54,8 @@ The project follows a clean separation of concerns:
 app/
   login/page.tsx          # Sign-up screen
   dashboard/page.tsx      # Scan list dashboard
-  scan/[id]/page.tsx      # Active scan detail
+  scan/page.tsx           # Active scan detail (no route params)
+  scan/[id]/page.tsx      # Legacy dynamic route (redirects to /scan)
   layout.tsx              # Root layout (Inter font, ThemeProvider, ToastProvider)
   globals.css             # CSS variables design system + animations
 
@@ -72,6 +73,7 @@ context/
 
 lib/
   mock-data.ts            # 12 scans, scan detail, console logs, findings
+  hooks/useSelectedScan.ts # Selected scan id storage + scan detail resolver
   utils.ts                # cn(), severity/status helpers, debounce
 ```
 
@@ -111,14 +113,15 @@ All data is typed with exported TypeScript interfaces (`ScanEntry`, `ScanDetail`
 - **Search** filters the scan table live by name, type, or target
 - **Filter modal** filters by status and scan type with visual checkboxes
 - **New Scan** button prepends a mock running scan to the table with a toast
-- **Row click** navigates to `/scan/[id]`
+- **Row click** stores the clicked scan id in `localStorage` and navigates to `/scan`
 - **Export Report** triggers a toast notification
 - **Stop Scan** shows a confirmation modal, then toasts on confirm
 - **Theme toggle** (top-right) switches dark/light instantly and persists
 
 ## Known Limitations
 
-- No real backend — all data is mock. The scan detail page shows the same `mockScanDetail` regardless of the scan ID in the URL.
+- No real backend — all data is mock.
+- Scan detail uses a selected scan id stored client-side (see `lib/hooks/useSelectedScan.ts`). It maps the selected `ScanEntry` onto a `ScanDetail` template.
 - The live console doesn't actually stream; it renders the full log on mount. A real implementation would use Server-Sent Events or WebSocket.
 - Pagination on the scan table is decorative (prev/next buttons exist but don't paginate since all data fits on one page with the mock set).
 - Social login buttons (Apple, Google, Meta) on the signup page are UI-only with no OAuth flow.
