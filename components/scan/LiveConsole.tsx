@@ -1,12 +1,8 @@
 'use client';
 
 import React, { useState, useRef, useEffect } from 'react';
-import { type ConsoleLogEntry, type VerificationLoop } from '@/lib/mock-data';
-
-interface LiveConsoleProps {
-  logs: ConsoleLogEntry[];
-  verificationLoops: VerificationLoop[];
-}
+import { type ConsoleLogEntry, type VerificationLoop } from '@/types/scan';
+import { type LiveConsoleProps } from '@/types/components';
 
 type ConsoleTab = 'activity' | 'verification';
 

@@ -6,11 +6,7 @@ import { Input, PasswordInput } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 import { AuthLayout } from '@/components/auth/AuthLayout';
 import { SocialButtons } from '@/components/auth/SocialButtons';
-
-interface FormErrors {
-  email?: string;
-  password?: string;
-}
+import { type FormErrors } from '@/types/components';
 
 export default function LoginPage() {
   const router = useRouter();

@@ -1,14 +1,7 @@
 'use client';
 
 import React from 'react';
-
-interface CircularProgressProps {
-  value: number;
-  size?: number;
-  strokeWidth?: number;
-  label?: string;
-  sublabel?: string;
-}
+import { type CircularProgressProps } from '@/types/ui';
 
 export function CircularProgress({
   value,

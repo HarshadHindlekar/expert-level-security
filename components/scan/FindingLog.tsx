@@ -1,12 +1,8 @@
 'use client';
 
 import React from 'react';
-import { type Finding } from '@/lib/mock-data';
 import { SeverityBadge } from '@/components/ui/Badge';
-
-interface FindingCardProps {
-  finding: Finding;
-}
+import { type FindingCardProps, type FindingLogProps } from '@/types/components';
 
 function FindingCard({ finding }: FindingCardProps) {
   return (
@@ -38,10 +34,6 @@ function FindingCard({ finding }: FindingCardProps) {
       </p>
     </div>
   );
-}
-
-interface FindingLogProps {
-  findings: Finding[];
 }
 
 export function FindingLog({ findings }: FindingLogProps) {

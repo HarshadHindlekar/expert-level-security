@@ -1,13 +1,8 @@
 'use client';
 
 import React from 'react';
-import { type ScanStatus } from '@/lib/mock-data';
 import { getStatusColor, getStatusBg } from '@/lib/utils';
-
-interface StatusChipProps {
-  status: ScanStatus;
-  size?: 'sm' | 'md';
-}
+import { type StatusChipProps } from '@/types/ui';
 
 export function StatusChip({ status, size = 'sm' }: StatusChipProps) {
   const color = getStatusColor(status);

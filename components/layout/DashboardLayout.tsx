@@ -3,17 +3,7 @@
 import React from 'react';
 import { Sidebar } from '@/components/sidebar/Sidebar';
 import { TopBar } from '@/components/layout/TopBar';
-
-interface BreadcrumbItem {
-  label: string;
-  href?: string;
-}
-
-interface DashboardLayoutProps {
-  children: React.ReactNode;
-  breadcrumbs?: BreadcrumbItem[];
-  topBarActions?: React.ReactNode;
-}
+import { type DashboardLayoutProps } from '@/types/components';
 
 export function DashboardLayout({ children, breadcrumbs, topBarActions }: DashboardLayoutProps) {
   return (

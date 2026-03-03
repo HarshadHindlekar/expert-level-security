@@ -1,15 +1,7 @@
 'use client';
 
 import React, { useEffect, useRef } from 'react';
-
-interface ModalProps {
-  open: boolean;
-  onClose: () => void;
-  title?: string;
-  children: React.ReactNode;
-  size?: 'sm' | 'md' | 'lg';
-  footer?: React.ReactNode;
-}
+import { type ModalProps } from '@/types/ui';
 
 export function Modal({ open, onClose, title, children, size = 'md', footer }: ModalProps) {
   const overlayRef = useRef<HTMLDivElement>(null);

@@ -2,15 +2,7 @@
 
 import React, { useState } from 'react';
 import { cn } from '@/lib/utils';
-
-interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-  label?: string;
-  error?: string;
-  icon?: React.ReactNode;
-  iconPosition?: 'left' | 'right';
-  onIconClick?: () => void;
-  variant?: 'default' | 'light';
-}
+import { type InputProps, type PasswordInputProps } from '@/types/ui';
 
 export function Input({
   label,
@@ -95,8 +87,6 @@ export function Input({
     </div>
   );
 }
-
-interface PasswordInputProps extends Omit<InputProps, 'type' | 'icon' | 'iconPosition' | 'onIconClick'> {}
 
 export function PasswordInput(props: PasswordInputProps) {
   const [visible, setVisible] = useState(false);

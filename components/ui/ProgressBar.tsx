@@ -1,16 +1,7 @@
 'use client';
 
 import React from 'react';
-
-interface ProgressBarProps {
-  value: number;
-  max?: number;
-  showLabel?: boolean;
-  height?: number;
-  color?: string;
-  trackColor?: string;
-  className?: string;
-}
+import { type ProgressBarProps } from '@/types/ui';
 
 export function ProgressBar({
   value,

@@ -2,15 +2,11 @@
 
 import React from 'react';
 import { useRouter } from 'next/navigation';
-import { type ScanEntry } from '@/lib/mock-data';
 import { StatusChip } from '@/components/ui/StatusChip';
 import { VulnBadges } from '@/components/ui/Badge';
 import { ProgressBar } from '@/components/ui/ProgressBar';
 import { useSelectedScanId } from '@/lib/hooks/useSelectedScan';
-
-interface ScanTableProps {
-  scans: ScanEntry[];
-}
+import { type ScanTableProps } from '@/types/components';
 
 export function ScanTable({ scans }: ScanTableProps) {
   const router = useRouter();

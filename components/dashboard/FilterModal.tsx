@@ -3,22 +3,9 @@
 import React, { useState } from 'react';
 import { Modal } from '@/components/ui/Modal';
 import { Button } from '@/components/ui/Button';
-import { type ScanStatus, type ScanType } from '@/lib/mock-data';
-
-interface FilterState {
-  statuses: ScanStatus[];
-  types: ScanType[];
-}
-
-interface FilterModalProps {
-  open: boolean;
-  onClose: () => void;
-  filters: FilterState;
-  onApply: (filters: FilterState) => void;
-}
-
-const allStatuses: ScanStatus[] = ['Completed', 'Scheduled', 'Failed', 'Running'];
-const allTypes: ScanType[] = ['Greybox', 'Blackbox'];
+import { type ScanStatus, type ScanType } from '@/types/scan';
+import { type FilterState, type FilterModalProps } from '@/types/components';
+import { allStatuses, allTypes } from '@/constants/filters';
 
 export function FilterModal({ open, onClose, filters, onApply }: FilterModalProps) {
   const [local, setLocal] = useState<FilterState>(filters);

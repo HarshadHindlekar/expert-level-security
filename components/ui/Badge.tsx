@@ -1,14 +1,8 @@
 'use client';
 
 import React from 'react';
-import { type Severity } from '@/lib/mock-data';
 import { getSeverityColor, getSeverityBg } from '@/lib/utils';
-
-interface SeverityBadgeProps {
-  severity: Severity;
-  count?: number;
-  size?: 'sm' | 'md';
-}
+import { type SeverityBadgeProps, type VulnBadgesProps, type BadgeProps } from '@/types/ui';
 
 export function SeverityBadge({ severity, count, size = 'sm' }: SeverityBadgeProps) {
   const color = getSeverityColor(severity);
@@ -30,14 +24,6 @@ export function SeverityBadge({ severity, count, size = 'sm' }: SeverityBadgePro
   );
 }
 
-interface VulnBadgesProps {
-  critical: number;
-  high: number;
-  medium: number;
-  low: number;
-  size?: 'sm' | 'md';
-}
-
 export function VulnBadges({ critical, high, medium, low, size = 'sm' }: VulnBadgesProps) {
   return (
     <div className="flex items-center gap-1">
@@ -47,13 +33,6 @@ export function VulnBadges({ critical, high, medium, low, size = 'sm' }: VulnBad
       {low > 0 && <SeverityBadge severity="Low" count={low} size={size} />}
     </div>
   );
-}
-
-interface BadgeProps {
-  children: React.ReactNode;
-  color?: string;
-  bg?: string;
-  className?: string;
 }
 
 export function Badge({ children, color, bg, className = '' }: BadgeProps) {

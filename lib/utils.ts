@@ -1,4 +1,4 @@
-import { type ScanStatus, type Severity } from './mock-data';
+import { type ScanStatus, type Severity } from '@/types/scan';
 
 export function cn(...classes: (string | undefined | null | false)[]): string {
   return classes.filter(Boolean).join(' ');

@@ -1,28 +1,8 @@
 'use client';
 
 import React from 'react';
-
-interface TopStatsCardProps {
-  label: string;
-  count: number;
-  change: string;
-  trend: 'up' | 'down';
-  icon: React.ReactNode;
-  color: string;
-  colorBg: string;
-}
-
-const TrendUpIcon = () => (
-  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-    <polyline points="18 15 12 9 6 15" />
-  </svg>
-);
-
-const TrendDownIcon = () => (
-  <svg width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-  <polyline points="6 9 12 15 18 9" />
-  </svg>
-);
+import { type TopStatsCardProps, type DashboardMetaBarProps } from '@/types/components';
+import { TrendUpIcon, TrendDownIcon, ClockIcon } from '@/components/icons/DashboardIcons';
 
 export function TopStatsCard({ label, count, change, trend, icon, color, colorBg }: TopStatsCardProps) {
   return (
@@ -69,23 +49,6 @@ export function TopStatsCard({ label, count, change, trend, icon, color, colorBg
     </div>
   );
 }
-
-interface DashboardMetaBarProps {
-  org: string;
-  owner: string;
-  totalScans: number;
-  scheduled: number;
-  rescans: number;
-  failedScans: number;
-  lastUpdated: string;
-}
-
-const ClockIcon = () => (
-  <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-    <circle cx="12" cy="12" r="10" />
-    <polyline points="12 6 12 12 16 14" />
-  </svg>
-);
 
 export function DashboardMetaBar({ org, owner, totalScans, scheduled, rescans, failedScans, lastUpdated }: DashboardMetaBarProps) {
   const items = [
