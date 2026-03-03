@@ -179,12 +179,16 @@ body {
   scrollbar-width: none;
 }
 
-.gradient-login-bg {
-  background: radial-gradient(ellipse at 20% 50%, rgba(0, 80, 60, 0.6) 0%, transparent 50%),
-              radial-gradient(ellipse at 80% 20%, rgba(20, 40, 40, 0.8) 0%, transparent 40%),
-              radial-gradient(ellipse at 60% 80%, rgba(150, 40, 20, 0.5) 0%, transparent 40%),
-              linear-gradient(135deg, #0A0A0A 0%, #0D1A15 30%, #1A0A0A 70%, #0A0A0A 100%);
-}
+ .gradient-login-bg {
+  background:
+    radial-gradient(1200px 900px at 82% 22%, rgba(18, 120, 130, 0.55) 0%, rgba(18, 120, 130, 0) 62%),
+    radial-gradient(1200px 900px at 58% 78%, rgba(255, 140, 60, 0.60) 0%, rgba(255, 140, 60, 0) 58%),
+    radial-gradient(1000px 800px at 96% 70%, rgba(255, 60, 40, 0.55) 0%, rgba(255, 60, 40, 0) 55%),
+    radial-gradient(900px 700px at 18% 42%, rgba(0, 110, 95, 0.42) 0%, rgba(0, 110, 95, 0) 60%),
+    radial-gradient(1200px 800px at 0% 0%, rgba(0, 0, 0, 0.55) 0%, rgba(0, 0, 0, 0) 60%),
+    radial-gradient(1200px 800px at 100% 100%, rgba(0, 0, 0, 0.40) 0%, rgba(0, 0, 0, 0) 62%),
+    linear-gradient(135deg, #0A0A0A 0%, #0B1B17 35%, #0A0A0A 70%, #12070A 100%);
+ }
 
 .progress-bar-inner {
   transition: width 0.6s cubic-bezier(0.4, 0, 0.2, 1);

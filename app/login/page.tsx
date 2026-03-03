@@ -82,9 +82,18 @@ export default function LoginPage() {
   ];
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: '#0A0A0A' }}>
+    <div className="min-h-screen relative overflow-hidden gradient-login-bg">
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(900px 520px at 30% 10%, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0) 70%)',
+        }}
+        aria-hidden="true"
+      />
+      <div className="min-h-screen flex relative z-10">
       {/* Left panel */}
-      <div className="hidden lg:flex lg:w-[45%] gradient-login-bg flex-col justify-between px-16 py-12 relative overflow-hidden">
+      <div className="hidden lg:flex lg:w-[45%] flex-col justify-between px-16 py-12 relative">
         {/* Logo */}
         <div className="flex items-center gap-2.5 z-10">
           <div
@@ -145,12 +154,7 @@ export default function LoginPage() {
       </div>
 
       {/* Right panel */}
-      <div
-        className="flex-1 flex items-center justify-center px-8 py-12 lg:px-16"
-        style={{
-          background: 'radial-gradient(ellipse at 70% 30%, rgba(10,30,25,0.9) 0%, #0A0A0A 60%)',
-        }}
-      >
+      <div className="flex-1 flex items-center justify-center px-8 py-12 lg:px-16">
         {/* Mobile logo */}
         <div className="lg:hidden absolute top-6 left-6 flex items-center gap-2">
           <div
@@ -346,6 +350,7 @@ export default function LoginPage() {
             </div>
           </div>
         </div>
+      </div>
       </div>
     </div>
   );
