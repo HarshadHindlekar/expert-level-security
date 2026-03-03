@@ -1,5 +1,6 @@
 @import "tailwindcss";
 
+
 :root {
   --bg-primary: #F5F5F5;
   --bg-secondary: #FFFFFF;
@@ -76,10 +77,12 @@
   --shadow-lg: 0 10px 30px rgba(0,0,0,0.5), 0 4px 8px rgba(0,0,0,0.3);
 }
 
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+@layer base {
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
 }
 
 html {

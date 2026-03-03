@@ -91,24 +91,30 @@ export default function LoginPage() {
         }}
         aria-hidden="true"
       />
-      <div className="min-h-screen flex relative z-10">
-      {/* Left panel */}
-      <div className="hidden lg:flex lg:w-[45%] flex-col justify-between px-16 py-12 relative">
-        {/* Logo */}
-        <div className="flex items-center gap-2.5 z-10">
-          <div
-            className="w-7 h-7 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: 'var(--accent)' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M7 1L2 4v4c0 2.8 2.1 5.4 5 6 2.9-.6 5-3.2 5-6V4L7 1z" fill="white" />
-            </svg>
+      <div className="min-h-screen relative z-10 flex flex-col">
+        <header className="w-full flex justify-center flex-shrink-0">
+          <div className="w-full px-4 pt-4">
+            <div className="flex items-center gap-2.5">
+              <div
+                className="w-7 h-7 rounded-full flex items-center justify-center"
+                style={{ backgroundColor: 'var(--accent)' }}
+                aria-hidden="true"
+              >
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
+                  <path d="M7 1L2 4v4c0 2.8 2.1 5.4 5 6 2.9-.6 5-3.2 5-6V4L7 1z" fill="white" />
+                </svg>
+              </div>
+              <span className="text-base font-bold text-white tracking-tight">aps</span>
+            </div>
           </div>
-          <span className="text-base font-bold text-white tracking-tight">aps</span>
-        </div>
+        </header>
 
+        <main className="flex-1 px-6 pb-10 lg:px-12 lg:pb-12 flex items-center justify-center">
+      <div className="w-full max-w-[1180px] grid grid-cols-1 lg:grid-cols-[1fr_520px] items-stretch gap-16">
+      {/* Left panel */}
+      <div className="hidden lg:flex flex-col justify-between h-full relative px-6 py-6">
         {/* Main content */}
-        <div className="z-10 flex flex-col gap-8">
+        <div className="z-10 flex flex-col gap-8 mt-10">
           <div>
             <h1 className="text-4xl font-bold text-white leading-tight mb-2">
               Expert level Cybersecurity{' '}
@@ -154,27 +160,15 @@ export default function LoginPage() {
       </div>
 
       {/* Right panel */}
-      <div className="flex-1 flex items-center justify-center px-8 py-12 lg:px-16">
-        {/* Mobile logo */}
-        <div className="lg:hidden absolute top-6 left-6 flex items-center gap-2">
-          <div
-            className="w-7 h-7 rounded-full flex items-center justify-center"
-            style={{ backgroundColor: 'var(--accent)' }}
-          >
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-              <path d="M7 1L2 4v4c0 2.8 2.1 5.4 5 6 2.9-.6 5-3.2 5-6V4L7 1z" fill="white" />
-            </svg>
-          </div>
-          <span className="text-base font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>aps</span>
-        </div>
-
+      <div className="w-full h-full flex items-center justify-center">
         <div className="w-full max-w-[420px]">
           <div
-            className="rounded-2xl p-8"
+            className="rounded-2xl p-12 sm:p-14"
             style={{
               backgroundColor: '#FFFFFF',
               border: '1px solid #E2E8F0',
               boxShadow: '0 25px 50px -12px rgba(0,0,0,0.6)',
+              padding: '3.5rem',
             }}
           >
             <div className="text-center mb-7">
@@ -197,9 +191,9 @@ export default function LoginPage() {
               </p>
             </div>
 
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4" noValidate>
+            <form onSubmit={handleSubmit} className="flex flex-col gap-5" noValidate>
               {/* Name row */}
-              <div className="grid grid-cols-2 gap-3">
+              <div className="grid grid-cols-1 gap-5">
                 <Input
                   variant="light"
                   placeholder="First name*"
@@ -299,6 +293,7 @@ export default function LoginPage() {
                 size="lg"
                 loading={loading}
                 className="w-full mt-1"
+                style={{ borderRadius: 9999 }}
               >
                 {loading ? 'Creating account...' : 'Create account'}
               </Button>
@@ -316,8 +311,8 @@ export default function LoginPage() {
               {/* Apple */}
               <button
                 type="button"
-                className="h-11 flex items-center justify-center rounded-[var(--radius-sm)] transition-all hover:opacity-80 active:scale-[0.97] cursor-pointer"
-                style={{ backgroundColor: '#000', color: 'white' }}
+                className="h-11 flex items-center justify-center rounded-xl transition-all hover:opacity-80 active:scale-[0.97] cursor-pointer"
+                style={{ backgroundColor: '#000', color: 'white', borderRadius: 9999 }}
                 aria-label="Continue with Apple"
               >
                 <AppleIcon />
@@ -326,10 +321,11 @@ export default function LoginPage() {
               {/* Google */}
               <button
                 type="button"
-                className="h-11 flex items-center justify-center rounded-[var(--radius-sm)] transition-all cursor-pointer"
+                className="h-11 flex items-center justify-center rounded-xl transition-all cursor-pointer"
                 style={{
                   backgroundColor: '#FFFFFF',
                   border: '1px solid #E5E7EB',
+                  borderRadius: 9999,
                 }}
                 aria-label="Continue with Google"
                 onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F9FAFB')}
@@ -341,8 +337,8 @@ export default function LoginPage() {
               {/* Meta */}
               <button
                 type="button"
-                className="h-11 flex items-center justify-center rounded-[var(--radius-sm)] transition-all hover:opacity-90 active:scale-[0.97] cursor-pointer"
-                style={{ backgroundColor: '#1877F2', color: 'white' }}
+                className="h-11 flex items-center justify-center rounded-xl transition-all hover:opacity-90 active:scale-[0.97] cursor-pointer"
+                style={{ backgroundColor: '#1877F2', color: 'white', borderRadius: 9999 }}
                 aria-label="Continue with Meta"
               >
                 <MetaIcon />
@@ -351,6 +347,8 @@ export default function LoginPage() {
           </div>
         </div>
       </div>
+      </div>
+        </main>
       </div>
     </div>
   );
