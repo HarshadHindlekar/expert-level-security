@@ -1,36 +1,131 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# APS — Expert Level Cybersecurity Dashboard
+
+A production-grade B2B SaaS security scanning dashboard built from scratch with Next.js App Router, TypeScript, and Tailwind CSS. No external UI kits, no dashboard templates — every component hand-crafted.
+
+## Tech Stack
+
+- **Framework**: Next.js 16 (App Router)
+- **Language**: TypeScript (strict mode)
+- **Styling**: Tailwind CSS v4 + CSS custom properties for theming
+- **Font**: Inter via `next/font/google`
+- **State**: React hooks only (`useState`, `useMemo`, `useEffect`, `useContext`)
+- **Routing**: Next.js App Router with file-based routes
 
 ## Getting Started
 
-First, run the development server:
-
 ```bash
+# Install dependencies
+npm install
+
+# Start development server
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+
+# Production build
+npm run build
+npm start
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) — it auto-redirects to `/login`.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Screens
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Route | Description |
+|---|---|
+| `/login` | Sign-up page with split layout, form validation, social buttons |
+| `/dashboard` | Scan list with severity stats, search/filter, new scan |
+| `/scan/[id]` | Active scan detail with live console, findings, step tracker |
 
-## Learn More
+## Architecture
 
-To learn more about Next.js, take a look at the following resources:
+The project follows a clean separation of concerns:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- **`app/`** — Next.js App Router pages (thin shells that compose layout + feature components)
+- **`components/ui/`** — Pure reusable primitives: Button, Input, Badge, Modal, Toast, ProgressBar, CircularProgress, StepTracker, StatusChip
+- **`components/layout/`** — DashboardLayout, TopBar (breadcrumbs + theme toggle)
+- **`components/sidebar/`** — Collapsible navigation sidebar with active state
+- **`components/dashboard/`** — TopStatsCard, DashboardMetaBar, ScanTable, FilterModal
+- **`components/scan/`** — LiveConsole (with log highlighting), FindingLog, ScanStatusBar
+- **`context/`** — ThemeContext (dark/light mode with localStorage persistence)
+- **`lib/`** — mock-data.ts (realistic scan data), utils.ts (helpers, cn, severity/status color maps)
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+## Folder Structure
 
-## Deploy on Vercel
+```
+app/
+  login/page.tsx          # Sign-up screen
+  dashboard/page.tsx      # Scan list dashboard
+  scan/[id]/page.tsx      # Active scan detail
+  layout.tsx              # Root layout (Inter font, ThemeProvider, ToastProvider)
+  globals.css             # CSS variables design system + animations
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+components/
+  ui/                     # Button, Input, PasswordInput, Badge, VulnBadges,
+  │                       # StatusChip, ProgressBar, CircularProgress,
+  │                       # StepTracker, Modal, Toast
+  layout/                 # DashboardLayout, TopBar
+  sidebar/                # Sidebar (with mobile hamburger + overlay)
+  dashboard/              # TopStatsCard, DashboardMetaBar, ScanTable, FilterModal
+  scan/                   # LiveConsole, FindingLog, ScanStatusBar
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+context/
+  theme-context.tsx       # ThemeContext + ThemeProvider
+
+lib/
+  mock-data.ts            # 12 scans, scan detail, console logs, findings
+  utils.ts                # cn(), severity/status helpers, debounce
+```
+
+## Theme Implementation
+
+The entire color system lives in `globals.css` as CSS custom properties under `:root` (light) and `.dark` (dark). Switching themes just toggles the `.dark` class on `<html>`:
+
+```css
+:root {
+  --bg-primary: #F5F5F5;
+  --bg-card: #FFFFFF;
+  --accent: #0CC8A8;
+  --severity-critical: #EF4444;
+  /* ... */
+}
+
+.dark {
+  --bg-primary: #0F0F0F;
+  --bg-card: #1E1E1E;
+  /* ... */
+}
+```
+
+`ThemeContext` reads from `localStorage` on mount, applies the class immediately (no flash), and exposes `toggleTheme()`. The toggle button lives in the TopBar on every authenticated screen.
+
+## Mock Data
+
+`lib/mock-data.ts` contains:
+- **12 scan entries** across Greybox/Blackbox types, with Completed/Scheduled/Failed/Running statuses and realistic vulnerability distributions
+- **Scan detail** with full step tracker state, 11 timestamped console log entries, 3 verification loops, and 6 findings across all severity levels
+- **Dashboard stats** for the meta bar (org, owner, counts) and severity summary cards
+
+All data is typed with exported TypeScript interfaces (`ScanEntry`, `ScanDetail`, `Finding`, `ConsoleLogEntry`, etc.).
+
+## Key Interactions
+
+- **Search** filters the scan table live by name, type, or target
+- **Filter modal** filters by status and scan type with visual checkboxes
+- **New Scan** button prepends a mock running scan to the table with a toast
+- **Row click** navigates to `/scan/[id]`
+- **Export Report** triggers a toast notification
+- **Stop Scan** shows a confirmation modal, then toasts on confirm
+- **Theme toggle** (top-right) switches dark/light instantly and persists
+
+## Known Limitations
+
+- No real backend — all data is mock. The scan detail page shows the same `mockScanDetail` regardless of the scan ID in the URL.
+- The live console doesn't actually stream; it renders the full log on mount. A real implementation would use Server-Sent Events or WebSocket.
+- Pagination on the scan table is decorative (prev/next buttons exist but don't paginate since all data fits on one page with the mock set).
+- Social login buttons (Apple, Google, Meta) on the signup page are UI-only with no OAuth flow.
+
+## Deployment
+
+The project is ready for Vercel out of the box — just connect the repo and deploy. No environment variables required (all data is mocked).
+
+```bash
+npm run build   # verifies the production build locally
