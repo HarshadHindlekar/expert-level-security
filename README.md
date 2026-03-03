@@ -19,6 +19,8 @@ npm install
 
 # Start development server
 npm run dev
+# or you can also use 
+npx next dev
 
 # Production build
 npm run build
@@ -32,8 +34,9 @@ Open [http://localhost:3000](http://localhost:3000) — it auto-redirects to `/l
 | Route | Description |
 |---|---|
 | `/login` | Sign-up page with split layout, form validation, social buttons |
+| `/signup` | Sign-up page with split layout, form validation, social buttons |
 | `/dashboard` | Scan list with severity stats, search/filter, new scan |
-| `/scan` | Active scan detail with live console, findings, step tracker (no route params) |
+| `/scan` | Active scan detail with live console, findings, step tracker (no route params handled by custon builded hook) |
 
 ## Architecture
 
@@ -51,11 +54,14 @@ The project follows a clean separation of concerns:
 ## Folder Structure
 
 ```
+.github/
+  workflows/pages.yml     # GitHub Pages deployment workflow
+
 app/
   login/page.tsx          # Sign-up screen
+  signup/page.tsx         # Signup screen
   dashboard/page.tsx      # Scan list dashboard
   scan/page.tsx           # Active scan detail (no route params)
-  scan/[id]/page.tsx      # Legacy dynamic route (redirects to /scan)
   layout.tsx              # Root layout (Inter font, ThemeProvider, ToastProvider)
   globals.css             # CSS variables design system + animations
 
@@ -75,6 +81,9 @@ lib/
   mock-data.ts            # 12 scans, scan detail, console logs, findings
   hooks/useSelectedScan.ts # Selected scan id storage + scan detail resolver
   utils.ts                # cn(), severity/status helpers, debounce
+
+constants/                # App constants (labels, enums, config)
+types/                    # Shared TypeScript types
 ```
 
 ## Theme Implementation
@@ -128,7 +137,26 @@ All data is typed with exported TypeScript interfaces (`ScanEntry`, `ScanDetail`
 
 ## Deployment
 
-The project is ready for Vercel out of the box — just connect the repo and deploy. No environment variables required (all data is mocked).
+### GitHub Pages
+
+This project is configured for GitHub Pages via **static export**.
+
+- Push to the `main` branch.
+- In GitHub: `Settings` -> `Pages` -> **Source: GitHub Actions**.
+- The workflow at `.github/workflows/pages.yml` builds and deploys the `out/` directory.
+
+The site will be available at:
+
+`https://<your-username>.github.io/<your-repo>/`
+
+### Local build verification
 
 ```bash
-npm run build   # verifies the production build locally
+npm run build
+```
+
+This produces an `out/` folder (static site output).
+
+### Vercel (optional)
+
+If you want a server-backed deployment, you can still deploy to Vercel, but GitHub Pages is static-only.
