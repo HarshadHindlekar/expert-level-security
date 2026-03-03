@@ -32,8 +32,10 @@ export function Input({
       {label && (
         <label
           htmlFor={inputId}
-          className="text-xs font-medium"
-          style={{ color: isLight ? '#374151' : 'var(--text-secondary)' }}
+          className={cn(
+            'text-xs font-medium',
+            isLight ? 'text-[#374151]' : 'text-[var(--text-secondary)]'
+          )}
         >
           {label}
         </label>
@@ -41,8 +43,10 @@ export function Input({
       <div className="relative flex items-center">
         {icon && iconPosition === 'left' && (
           <span
-            className="absolute left-3 flex items-center justify-center pointer-events-none"
-            style={{ color: isLight ? '#9CA3AF' : 'var(--text-muted)' }}
+            className={cn(
+              'absolute left-3 flex items-center justify-center pointer-events-none',
+              isLight ? 'text-[#9CA3AF]' : 'text-[var(--text-muted)]'
+            )}
             aria-hidden="true"
           >
             {icon}
@@ -52,27 +56,30 @@ export function Input({
           id={inputId}
           className={cn(
             'w-full h-11 rounded-[var(--radius-sm)] text-sm transition-all duration-150',
-            'focus:outline-none focus:ring-2',
+            'focus:outline-none focus:ring-2 focus:ring-[rgba(12,200,168,0.2)]',
+            isLight ? 'bg-[#F9FAFB] text-[#111827]' : 'bg-[var(--bg-input)] text-[var(--text-primary)]',
+            error
+              ? isLight
+                ? 'border border-[#EF4444]'
+                : 'border border-[var(--severity-critical)]'
+              : isLight
+                ? 'border border-[#D1D5DB]'
+                : 'border border-[var(--border-color)]',
             icon && iconPosition === 'left' ? 'pl-10 pr-4' : '',
             icon && iconPosition === 'right' ? 'pl-4 pr-10' : '',
             !icon ? 'px-4' : '',
             className
           )}
-          style={{
-            backgroundColor: isLight ? '#F9FAFB' : 'var(--bg-input)',
-            color: isLight ? '#111827' : 'var(--text-primary)',
-            border: `1px solid ${error ? (isLight ? '#EF4444' : 'var(--severity-critical)') : (isLight ? '#D1D5DB' : 'var(--border-color)')}`,
-            // @ts-expect-error css custom property
-            '--tw-ring-color': 'rgba(12,200,168,0.2)',
-          }}
           {...props}
         />
         {icon && iconPosition === 'right' && (
           <button
             type="button"
             onClick={onIconClick}
-            className="absolute right-3 flex items-center justify-center transition-colors cursor-pointer"
-            style={{ color: isLight ? '#9CA3AF' : 'var(--text-muted)' }}
+            className={cn(
+              'absolute right-3 flex items-center justify-center transition-colors cursor-pointer',
+              isLight ? 'text-[#9CA3AF]' : 'text-[var(--text-muted)]'
+            )}
             tabIndex={-1}
             aria-label="Toggle visibility"
           >
@@ -81,7 +88,7 @@ export function Input({
         )}
       </div>
       {error && (
-        <p className="text-xs" style={{ color: isLight ? '#EF4444' : 'var(--severity-critical)' }}>
+        <p className={cn('text-xs', isLight ? 'text-[#EF4444]' : 'text-[var(--severity-critical)]')}>
           {error}
         </p>
       )}

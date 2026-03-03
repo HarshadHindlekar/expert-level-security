@@ -40,10 +40,7 @@ export function ProgressBar({
         />
       </div>
       {showLabel && (
-        <span
-          className="text-xs font-medium tabular-nums flex-shrink-0"
-          style={{ color: 'var(--text-secondary)', minWidth: '34px' }}
-        >
+        <span className="text-xs font-medium tabular-nums flex-shrink-0 text-[var(--text-secondary)] min-w-[34px]">
           {Math.round(pct)}%
         </span>
       )}

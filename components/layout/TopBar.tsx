@@ -47,19 +47,13 @@ export function TopBar({ breadcrumbs = [], actions }: TopBarProps) {
 
   return (
     <header
-      className="flex items-center justify-between pl-14 pr-4 md:px-5 flex-shrink-0"
-      style={{
-        height: '56px',
-        backgroundColor: 'var(--bg-sidebar)',
-        borderBottom: '1px solid var(--border-color)',
-      }}
+      className="flex items-center justify-between pl-14 pr-4 md:px-5 flex-shrink-0 h-14 bg-[var(--bg-sidebar)] border-b border-[var(--border-color)]"
     >
       {/* Breadcrumbs */}
       <nav className="flex items-center gap-1.5 text-sm" aria-label="Breadcrumb">
         <Link
           href="/dashboard"
-          className="flex items-center gap-1 transition-colors hover:text-[var(--text-primary)]"
-          style={{ color: 'var(--text-secondary)' }}
+          className="flex items-center gap-1 transition-colors hover:text-[var(--text-primary)] text-[var(--text-secondary)]"
           aria-label="Scan home"
         >
           <HomeIcon />
@@ -67,19 +61,17 @@ export function TopBar({ breadcrumbs = [], actions }: TopBarProps) {
         </Link>
         {breadcrumbs.map((crumb, i) => (
           <React.Fragment key={i}>
-            <span style={{ color: 'var(--text-muted)' }} aria-hidden="true">/</span>
+            <span className="text-[var(--text-muted)]" aria-hidden="true">/</span>
             {crumb.href ? (
               <Link
                 href={crumb.href}
-                className="transition-colors hover:text-[var(--text-primary)]"
-                style={{ color: 'var(--text-secondary)' }}
+                className="transition-colors hover:text-[var(--text-primary)] text-[var(--text-secondary)]"
               >
                 {crumb.label}
               </Link>
             ) : (
               <span
-                className="font-medium"
-                style={{ color: 'var(--text-primary)' }}
+                className="font-medium text-[var(--text-primary)]"
                 aria-current="page"
               >
                 {crumb.label}
@@ -94,8 +86,7 @@ export function TopBar({ breadcrumbs = [], actions }: TopBarProps) {
         {/* Theme toggle */}
         <button
           onClick={toggleTheme}
-          className="w-8 h-8 rounded-[var(--radius-sm)] flex items-center justify-center transition-all duration-150 hover:bg-[var(--bg-hover)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]"
-          style={{ color: 'var(--text-secondary)' }}
+          className="w-8 h-8 rounded-[var(--radius-sm)] flex items-center justify-center transition-all duration-150 hover:bg-[var(--bg-hover)] cursor-pointer focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] text-[var(--text-secondary)]"
           aria-label={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
           title={`Switch to ${theme === 'dark' ? 'light' : 'dark'} mode`}
         >

@@ -115,11 +115,7 @@ function ScanDetailContent() {
       <div className="flex flex-col flex-1 min-h-0 overflow-hidden">
         {/* Scan progress header */}
         <div
-          className="px-6 py-5 flex-shrink-0"
-          style={{
-            backgroundColor: 'var(--bg-card)',
-            borderBottom: '1px solid var(--border-color)',
-          }}
+          className="px-6 py-5 flex-shrink-0 bg-[var(--bg-card)] border-b border-[var(--border-color)]"
         >
           <div className="flex items-center gap-6 mb-5">
             {/* Circular progress */}
@@ -141,32 +137,31 @@ function ScanDetailContent() {
 
           {/* Metadata row */}
           <div
-            className="flex items-center overflow-x-auto no-scrollbar"
-            style={{ borderTop: '1px solid var(--border-subtle)', paddingTop: '14px', gap: 0 }}
+            className="flex items-center overflow-x-auto no-scrollbar border-t border-[var(--border-subtle)] pt-3.5 gap-0"
           >
             {metaItems.map((item, i) => (
               <React.Fragment key={item.label}>
                 {i > 0 && (
                   <span
-                    className="w-px flex-shrink-0 self-stretch"
-                    style={{ backgroundColor: 'var(--border-color)', minHeight: '36px' }}
+                    className="w-px flex-shrink-0 self-stretch bg-[var(--border-color)] min-h-[36px]"
                     aria-hidden="true"
                   />
                 )}
                 <div className="flex flex-col gap-0.5 px-5 flex-shrink-0">
                   <div className="flex items-center gap-1.5">
-                    <span style={{ color: 'var(--text-muted)' }} aria-hidden="true">
+                    <span className="text-[var(--text-muted)]" aria-hidden="true">
                       {metaIcons[item.label]}
                     </span>
-                    <span className="text-xs whitespace-nowrap" style={{ color: 'var(--text-muted)' }}>
+                    <span className="text-xs whitespace-nowrap text-[var(--text-muted)]">
                       {item.label}
                     </span>
                   </div>
                   <span
-                    className="text-sm font-semibold whitespace-nowrap"
-                    style={{
-                      color: item.label === 'Checklists' ? 'var(--accent)' : 'var(--text-primary)',
-                    }}
+                    className={
+                      item.label === 'Checklists'
+                        ? 'text-sm font-semibold whitespace-nowrap text-[var(--accent)]'
+                        : 'text-sm font-semibold whitespace-nowrap text-[var(--text-primary)]'
+                    }
                   >
                     {item.value}
                   </span>
@@ -179,7 +174,7 @@ function ScanDetailContent() {
         {/* Main split panel */}
         <div className="flex flex-col lg:flex-row flex-1 min-h-0 gap-4 p-4 overflow-hidden">
           {/* Left: Console */}
-          <div className="flex flex-col flex-1 min-w-0 min-h-0" style={{ minHeight: '320px' }}>
+          <div className="flex flex-col flex-1 min-w-0 min-h-0 min-h-[320px]">
             <LiveConsole
               logs={detail.consoleLogs}
               verificationLoops={detail.verificationLoops}
@@ -187,7 +182,7 @@ function ScanDetailContent() {
           </div>
 
           {/* Right: Findings */}
-          <div className="flex flex-col lg:w-[340px] w-full min-h-0 flex-shrink-0" style={{ minHeight: '240px' }}>
+          <div className="flex flex-col lg:w-[340px] w-full min-h-0 flex-shrink-0 min-h-[240px]">
             <FindingLog findings={detail.findings} />
           </div>
         </div>
@@ -214,8 +209,7 @@ function ScanDetailContent() {
       >
         <div className="flex flex-col gap-3">
           <div
-            className="w-12 h-12 rounded-full flex items-center justify-center mx-auto"
-            style={{ backgroundColor: 'var(--severity-critical-bg)' }}
+            className="w-12 h-12 rounded-full flex items-center justify-center mx-auto bg-[var(--severity-critical-bg)]"
             aria-hidden="true"
           >
             <svg
@@ -231,7 +225,7 @@ function ScanDetailContent() {
               <line x1="12" y1="17" x2="12.01" y2="17" />
             </svg>
           </div>
-          <p className="text-sm text-center" style={{ color: 'var(--text-secondary)' }}>
+          <p className="text-sm text-center text-[var(--text-secondary)]">
             Are you sure you want to stop the scan? This action cannot be undone. All partial results will be preserved.
           </p>
         </div>

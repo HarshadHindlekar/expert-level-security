@@ -39,12 +39,12 @@ export function ScanTable({ scans }: ScanTableProps) {
           fill="none"
           stroke="currentColor"
           strokeWidth="1.5"
-          style={{ color: 'var(--text-muted)' }}
+          className="text-[var(--text-muted)]"
         >
           <circle cx="11" cy="11" r="8" />
           <line x1="21" y1="21" x2="16.65" y2="16.65" />
         </svg>
-        <p className="text-sm font-medium" style={{ color: 'var(--text-muted)' }}>
+        <p className="text-sm font-medium text-[var(--text-muted)]">
           No scans match your search
         </p>
       </div>
@@ -54,26 +54,26 @@ export function ScanTable({ scans }: ScanTableProps) {
   return (
     <div className="overflow-x-auto">
       <table className="w-full min-w-[720px]" role="grid" aria-label="Scan list">
-        <colgroup>
-          <col style={{ width: '28%' }} />
-          <col style={{ width: '10%' }} />
-          <col style={{ width: '12%' }} />
-          <col style={{ width: '20%' }} />
-          <col style={{ width: '20%' }} />
-          <col style={{ width: '10%' }} />
-        </colgroup>
         <thead>
           <tr
-            style={{
-              borderBottom: '1px solid var(--border-color)',
-              backgroundColor: 'var(--bg-primary)',
-            }}
+            className="border-b border-[var(--border-color)] bg-[var(--bg-primary)]"
           >
-            {['Scan Name', 'Type', 'Status', 'Progress', 'Vulnerability', 'Last Scan'].map((col) => (
+            {['Scan Name', 'Type', 'Status', 'Progress', 'Vulnerability', 'Last Scan'].map((col, idx) => (
               <th
                 key={col}
-                className="text-left px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider"
-                style={{ color: 'var(--text-muted)' }}
+                className={
+                  idx === 0
+                    ? 'text-left px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] w-[28%]'
+                    : idx === 1
+                      ? 'text-left px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] w-[10%]'
+                      : idx === 2
+                        ? 'text-left px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] w-[12%]'
+                        : idx === 3
+                          ? 'text-left px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] w-[20%]'
+                          : idx === 4
+                            ? 'text-left px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] w-[20%]'
+                            : 'text-left px-5 py-2.5 text-[11px] font-semibold uppercase tracking-wider text-[var(--text-muted)] w-[10%]'
+                }
                 scope="col"
               >
                 {col}
@@ -90,25 +90,15 @@ export function ScanTable({ scans }: ScanTableProps) {
               tabIndex={0}
               role="row"
               aria-label={`${scan.name} - ${scan.status}`}
-              className="group cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-inset"
-              style={{
-                backgroundColor: 'var(--bg-table-row)',
-                borderBottom: '1px solid var(--border-subtle)',
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLTableRowElement).style.backgroundColor = 'var(--bg-hover)';
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLTableRowElement).style.backgroundColor = 'var(--bg-table-row)';
-              }}
+              className="group cursor-pointer transition-colors focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)] focus-visible:ring-inset bg-[var(--bg-table-row)] border-b border-[var(--border-subtle)] hover:bg-[var(--bg-hover)]"
             >
               <td className="px-5 py-4">
-                <span className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+                <span className="text-sm font-semibold text-[var(--text-primary)]">
                   {scan.name}
                 </span>
               </td>
               <td className="px-5 py-4">
-                <span className="text-sm" style={{ color: 'var(--text-secondary)' }}>
+                <span className="text-sm text-[var(--text-secondary)]">
                   {scan.type}
                 </span>
               </td>
@@ -140,7 +130,7 @@ export function ScanTable({ scans }: ScanTableProps) {
                 />
               </td>
               <td className="px-5 py-4">
-                <span className="text-sm" style={{ color: 'var(--text-muted)' }}>
+                <span className="text-sm text-[var(--text-muted)]">
                   {scan.lastScan}
                 </span>
               </td>
@@ -150,16 +140,14 @@ export function ScanTable({ scans }: ScanTableProps) {
       </table>
 
       <div
-        className="flex items-center justify-between px-5 py-3"
-        style={{ borderTop: '1px solid var(--border-subtle)' }}
+        className="flex items-center justify-between px-5 py-3 border-t border-[var(--border-subtle)]"
       >
-        <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+        <span className="text-xs text-[var(--text-muted)]">
           Showing {scans.length} of {scans.length} Scans
         </span>
         <div className="flex items-center gap-2">
           <button
-            className="w-7 h-7 rounded flex items-center justify-center transition-colors hover:bg-[var(--bg-hover)] cursor-pointer"
-            style={{ color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}
+            className="w-7 h-7 rounded flex items-center justify-center transition-colors hover:bg-[var(--bg-hover)] cursor-pointer text-[var(--text-muted)] border border-[var(--border-color)]"
             aria-label="Previous page"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -167,8 +155,7 @@ export function ScanTable({ scans }: ScanTableProps) {
             </svg>
           </button>
           <button
-            className="w-7 h-7 rounded flex items-center justify-center transition-colors hover:bg-[var(--bg-hover)] cursor-pointer"
-            style={{ color: 'var(--text-muted)', border: '1px solid var(--border-color)' }}
+            className="w-7 h-7 rounded flex items-center justify-center transition-colors hover:bg-[var(--bg-hover)] cursor-pointer text-[var(--text-muted)] border border-[var(--border-color)]"
             aria-label="Next page"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

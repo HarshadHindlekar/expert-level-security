@@ -46,11 +46,7 @@ export function ScanStatusBar({ detail }: ScanStatusBarProps) {
 
   return (
     <div
-      className="flex items-center px-5 py-2.5 gap-5 flex-wrap flex-shrink-0"
-      style={{
-        backgroundColor: 'var(--bg-card)',
-        borderTop: '1px solid var(--border-color)',
-      }}
+      className="flex items-center px-5 py-2.5 gap-5 flex-wrap flex-shrink-0 bg-[var(--bg-card)] border-t border-[var(--border-color)]"
       role="status"
       aria-label="Scan status"
     >
@@ -59,18 +55,18 @@ export function ScanStatusBar({ detail }: ScanStatusBarProps) {
         {items.map((item, i) => (
           <React.Fragment key={item.label}>
             <div className="flex items-center gap-1.5">
-              <span className="flex-shrink-0" style={{ color: 'var(--accent)' }} aria-hidden="true">
+              <span className="flex-shrink-0 text-[var(--accent)]" aria-hidden="true">
                 {item.icon}
               </span>
-              <span className="text-xs" style={{ color: 'var(--text-muted)' }}>
+              <span className="text-xs text-[var(--text-muted)]">
                 {item.label}:
               </span>
-              <span className="text-xs font-semibold tabular-nums" style={{ color: 'var(--text-primary)' }}>
+              <span className="text-xs font-semibold tabular-nums text-[var(--text-primary)]">
                 {item.value}
               </span>
             </div>
             {i < items.length - 1 && (
-              <span className="w-px h-3 flex-shrink-0" style={{ backgroundColor: 'var(--border-color)' }} aria-hidden="true" />
+              <span className="w-px h-3 flex-shrink-0 bg-[var(--border-color)]" aria-hidden="true" />
             )}
           </React.Fragment>
         ))}
@@ -78,8 +74,7 @@ export function ScanStatusBar({ detail }: ScanStatusBarProps) {
 
       {/* Divider */}
       <div
-        className="w-px h-4 flex-shrink-0"
-        style={{ backgroundColor: 'var(--border-color)' }}
+        className="w-px h-4 flex-shrink-0 bg-[var(--border-color)]"
         aria-hidden="true"
       />
 
@@ -90,8 +85,8 @@ export function ScanStatusBar({ detail }: ScanStatusBarProps) {
           return (
             <div key={s.key} className="flex items-center gap-1.5">
               <SeverityBadge severity={s.label as 'Critical' | 'High' | 'Medium' | 'Low'} count={count} size="sm" />
-              <span className="text-xs hidden sm:inline" style={{ color: 'var(--text-muted)' }}>
-                {s.label}: <span className="font-semibold" style={{ color: 'var(--text-primary)' }}>{count}</span>
+              <span className="text-xs hidden sm:inline text-[var(--text-muted)]">
+                {s.label}: <span className="font-semibold text-[var(--text-primary)]">{count}</span>
               </span>
             </div>
           );

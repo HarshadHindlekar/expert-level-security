@@ -54,25 +54,13 @@ export function StepTracker({ steps, currentStep }: StepTrackerProps) {
           <React.Fragment key={step}>
             <div className="flex flex-col items-center gap-2 flex-shrink-0">
               <div
-                className="w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0"
-                style={{
-                  backgroundColor: isActive
-                    ? 'var(--accent)'
+                className={
+                  isActive
+                    ? 'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 bg-[var(--accent)] text-white border-2 border-[var(--accent)] shadow-[0_0_12px_rgba(12,200,168,0.4)]'
                     : isCompleted
-                    ? 'var(--accent-light)'
-                    : 'var(--bg-hover)',
-                  color: isActive
-                    ? '#fff'
-                    : isCompleted
-                    ? 'var(--accent)'
-                    : 'var(--text-muted)',
-                  border: isActive
-                    ? '2px solid var(--accent)'
-                    : isCompleted
-                    ? '2px solid var(--accent)'
-                    : '2px solid var(--border-color)',
-                  boxShadow: isActive ? '0 0 12px rgba(12,200,168,0.4)' : 'none',
-                }}
+                      ? 'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 bg-[var(--accent-light)] text-[var(--accent)] border-2 border-[var(--accent)]'
+                      : 'w-10 h-10 rounded-full flex items-center justify-center transition-all duration-300 flex-shrink-0 bg-[var(--bg-hover)] text-[var(--text-muted)] border-2 border-[var(--border-color)]'
+                }
                 aria-label={`${step}: ${isActive ? 'active' : isCompleted ? 'completed' : 'pending'}`}
               >
                 {stepIcons[step] ?? (
@@ -80,27 +68,24 @@ export function StepTracker({ steps, currentStep }: StepTrackerProps) {
                 )}
               </div>
               <span
-                className="text-xs font-medium text-center leading-tight"
-                style={{
-                  color: isActive
-                    ? 'var(--accent)'
+                className={
+                  isActive
+                    ? 'text-xs font-medium text-center leading-tight whitespace-nowrap text-[var(--accent)]'
                     : isCompleted
-                    ? 'var(--text-secondary)'
-                    : 'var(--text-muted)',
-                  whiteSpace: 'nowrap',
-                }}
+                      ? 'text-xs font-medium text-center leading-tight whitespace-nowrap text-[var(--text-secondary)]'
+                      : 'text-xs font-medium text-center leading-tight whitespace-nowrap text-[var(--text-muted)]'
+                }
               >
                 {step}
               </span>
             </div>
             {!isLast && (
               <div
-                className="flex-1 h-[2px] mx-2 transition-all duration-500"
-                style={{
-                  backgroundColor: isCompleted ? 'var(--accent)' : 'var(--border-color)',
-                  marginTop: '-20px',
-                  flexShrink: 1,
-                }}
+                className={
+                  isCompleted
+                    ? 'flex-1 h-[2px] mx-2 transition-all duration-500 bg-[var(--accent)] mt-[-20px]'
+                    : 'flex-1 h-[2px] mx-2 transition-all duration-500 bg-[var(--border-color)] mt-[-20px]'
+                }
                 aria-hidden="true"
               />
             )}

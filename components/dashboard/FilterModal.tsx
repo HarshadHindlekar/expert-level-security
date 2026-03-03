@@ -60,6 +60,13 @@ export function FilterModal({ open, onClose, filters, onApply }: FilterModalProp
     Running: 'var(--accent)',
   };
 
+  const statusDotClasses: Record<ScanStatus, string> = {
+    Completed: 'bg-[var(--severity-low)]',
+    Scheduled: 'bg-[var(--text-muted)]',
+    Failed: 'bg-[var(--severity-critical)]',
+    Running: 'bg-[var(--accent)]',
+  };
+
   return (
     <Modal
       open={open}
@@ -79,7 +86,7 @@ export function FilterModal({ open, onClose, filters, onApply }: FilterModalProp
     >
       <div className="flex flex-col gap-5">
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: 'var(--text-muted)' }}>
+          <p className="text-xs font-semibold uppercase tracking-wide mb-3 text-[var(--text-muted)]">
             Status
           </p>
           <div className="flex flex-col gap-2">
@@ -89,11 +96,11 @@ export function FilterModal({ open, onClose, filters, onApply }: FilterModalProp
                 className="flex items-center gap-3 cursor-pointer group"
               >
                 <div
-                  className="relative w-4 h-4 rounded flex-shrink-0 flex items-center justify-center transition-all"
-                  style={{
-                    backgroundColor: local.statuses.includes(s) ? 'var(--accent)' : 'var(--bg-input)',
-                    border: `1.5px solid ${local.statuses.includes(s) ? 'var(--accent)' : 'var(--border-color)'}`,
-                  }}
+                  className={
+                    local.statuses.includes(s)
+                      ? 'relative w-4 h-4 rounded flex-shrink-0 flex items-center justify-center transition-all bg-[var(--accent)] border-[1.5px] border-[var(--accent)]'
+                      : 'relative w-4 h-4 rounded flex-shrink-0 flex items-center justify-center transition-all bg-[var(--bg-input)] border-[1.5px] border-[var(--border-color)]'
+                  }
                   onClick={() => toggleStatus(s)}
                 >
                   {local.statuses.includes(s) && (
@@ -111,11 +118,10 @@ export function FilterModal({ open, onClose, filters, onApply }: FilterModalProp
                 />
                 <div className="flex items-center gap-2">
                   <span
-                    className="w-2 h-2 rounded-full"
-                    style={{ backgroundColor: statusColors[s] }}
+                    className={`w-2 h-2 rounded-full ${statusDotClasses[s]}`}
                     aria-hidden="true"
                   />
-                  <span className="text-sm" style={{ color: 'var(--text-primary)' }}>
+                  <span className="text-sm text-[var(--text-primary)]">
                     {s}
                   </span>
                 </div>
@@ -125,13 +131,12 @@ export function FilterModal({ open, onClose, filters, onApply }: FilterModalProp
         </div>
 
         <div
-          className="h-px"
-          style={{ backgroundColor: 'var(--border-subtle)' }}
+          className="h-px bg-[var(--border-subtle)]"
           aria-hidden="true"
         />
 
         <div>
-          <p className="text-xs font-semibold uppercase tracking-wide mb-3" style={{ color: 'var(--text-muted)' }}>
+          <p className="text-xs font-semibold uppercase tracking-wide mb-3 text-[var(--text-muted)]">
             Scan Type
           </p>
           <div className="flex flex-col gap-2">
@@ -141,11 +146,11 @@ export function FilterModal({ open, onClose, filters, onApply }: FilterModalProp
                 className="flex items-center gap-3 cursor-pointer"
               >
                 <div
-                  className="relative w-4 h-4 rounded flex-shrink-0 flex items-center justify-center transition-all"
-                  style={{
-                    backgroundColor: local.types.includes(t) ? 'var(--accent)' : 'var(--bg-input)',
-                    border: `1.5px solid ${local.types.includes(t) ? 'var(--accent)' : 'var(--border-color)'}`,
-                  }}
+                  className={
+                    local.types.includes(t)
+                      ? 'relative w-4 h-4 rounded flex-shrink-0 flex items-center justify-center transition-all bg-[var(--accent)] border-[1.5px] border-[var(--accent)]'
+                      : 'relative w-4 h-4 rounded flex-shrink-0 flex items-center justify-center transition-all bg-[var(--bg-input)] border-[1.5px] border-[var(--border-color)]'
+                  }
                   onClick={() => toggleType(t)}
                 >
                   {local.types.includes(t) && (
@@ -161,7 +166,7 @@ export function FilterModal({ open, onClose, filters, onApply }: FilterModalProp
                   onChange={() => toggleType(t)}
                   aria-label={t}
                 />
-                <span className="text-sm" style={{ color: 'var(--text-primary)' }}>
+                <span className="text-sm text-[var(--text-primary)]">
                   {t}
                 </span>
               </label>

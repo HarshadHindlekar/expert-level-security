@@ -6,7 +6,17 @@ import { Input, PasswordInput } from '@/components/ui/Input';
 import { Button } from '@/components/ui/Button';
 
 const CheckIcon = () => (
-  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round" style={{ color: 'var(--accent)', flexShrink: 0 }}>
+  <svg
+    width="14"
+    height="14"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    className="text-[var(--accent)] shrink-0"
+  >
     <polyline points="20 6 9 17 4 12" />
   </svg>
 );
@@ -84,11 +94,7 @@ export default function LoginPage() {
   return (
     <div className="min-h-screen relative overflow-hidden gradient-login-bg">
       <div
-        className="absolute inset-0"
-        style={{
-          background:
-            'radial-gradient(900px 520px at 30% 10%, rgba(0,0,0,0.10) 0%, rgba(0,0,0,0) 70%)',
-        }}
+        className="absolute inset-0 bg-[radial-gradient(900px_520px_at_30%_10%,rgba(0,0,0,0.10)_0%,rgba(0,0,0,0)_70%)]"
         aria-hidden="true"
       />
       <div className="min-h-screen relative z-10 flex flex-col">
@@ -96,8 +102,7 @@ export default function LoginPage() {
           <div className="w-full px-4 pt-4">
             <div className="flex items-center gap-2.5">
               <div
-                className="w-7 h-7 rounded-full flex items-center justify-center"
-                style={{ backgroundColor: 'var(--accent)' }}
+                className="w-7 h-7 rounded-full flex items-center justify-center bg-[var(--accent)]"
                 aria-hidden="true"
               >
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -120,13 +125,13 @@ export default function LoginPage() {
               Expert level Cybersecurity{' '}
               <br />
               in{' '}
-              <span style={{ color: 'var(--accent)' }}>hours</span>{' '}
+              <span className="text-[var(--accent)]">hours</span>{' '}
               not weeks.
             </h1>
           </div>
 
           <div>
-            <p className="text-sm font-semibold mb-4" style={{ color: 'rgba(255,255,255,0.6)' }}>
+            <p className="text-sm font-semibold mb-4 text-[rgba(255,255,255,0.6)]">
               What&apos;s included
             </p>
             <ul className="flex flex-col gap-3" role="list">
@@ -135,7 +140,7 @@ export default function LoginPage() {
                   <span className="mt-0.5 flex-shrink-0">
                     <CheckIcon />
                   </span>
-                  <span className="text-sm leading-relaxed" style={{ color: 'rgba(255,255,255,0.75)' }}>
+                  <span className="text-sm leading-relaxed text-[rgba(255,255,255,0.75)]">
                     {feature}
                   </span>
                 </li>
@@ -148,13 +153,13 @@ export default function LoginPage() {
         <div className="z-10">
           <div className="flex items-center gap-2 mb-1">
             <StarIcon />
-            <span className="text-sm font-medium" style={{ color: 'rgba(255,255,255,0.8)' }}>
+            <span className="text-sm font-medium text-[rgba(255,255,255,0.8)]">
               Trustpilot
             </span>
           </div>
           <div className="flex items-baseline gap-2">
             <span className="text-lg font-bold text-white">Rated 4.5/5.0</span>
-            <span className="text-sm" style={{ color: 'rgba(255,255,255,0.5)' }}>(100k+ reviews)</span>
+            <span className="text-sm text-[rgba(255,255,255,0.5)]">(100k+ reviews)</span>
           </div>
         </div>
       </div>
@@ -163,27 +168,19 @@ export default function LoginPage() {
       <div className="w-full h-full flex items-center justify-center">
         <div className="w-full max-w-[420px]">
           <div
-            className="rounded-2xl p-12 sm:p-14"
-            style={{
-              backgroundColor: '#FFFFFF',
-              border: '1px solid #E2E8F0',
-              boxShadow: '0 25px 50px -12px rgba(0,0,0,0.6)',
-              padding: '3.5rem',
-            }}
+            className="rounded-2xl p-8 bg-white border border-[#E2E8F0] shadow-[0_25px_50px_-12px_rgba(0,0,0,0.6)]"
           >
             <div className="text-center mb-7">
               <h2
-                className="text-2xl font-bold mb-1.5"
-                style={{ color: '#111111' }}
+                className="text-2xl font-bold mb-1.5 text-[#111111]"
               >
                 Sign up
               </h2>
-              <p className="text-sm" style={{ color: '#555555' }}>
+              <p className="text-sm text-[#555555]">
                 Already have an account?{' '}
                 <button
                   type="button"
-                  className="font-semibold transition-colors hover:opacity-80 cursor-pointer"
-                  style={{ color: 'var(--accent)' }}
+                  className="font-semibold transition-colors hover:opacity-80 cursor-pointer text-[var(--accent)]"
                   onClick={() => router.push('/dashboard')}
                 >
                   Log in
@@ -237,50 +234,50 @@ export default function LoginPage() {
 
               {/* Terms checkbox */}
               <div className="flex flex-col gap-1">
-                <label className="flex items-start gap-3 cursor-pointer" htmlFor="terms">
-                  <div
-                    className="relative w-4 h-4 rounded flex-shrink-0 mt-0.5 flex items-center justify-center transition-all cursor-pointer"
-                    style={{
-                      backgroundColor: terms ? 'var(--accent)' : '#F3F4F6',
-                      border: `1.5px solid ${terms ? 'var(--accent)' : '#D1D5DB'}`,
-                    }}
-                    onClick={() => setTerms((v) => !v)}
-                  >
-                    {terms && (
-                      <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
-                        <path d="M2 5l2.5 2.5L8 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                      </svg>
-                    )}
-                  </div>
-                  <input
-                    id="terms"
-                    type="checkbox"
-                    className="sr-only"
-                    checked={terms}
-                    onChange={(e) => setTerms(e.target.checked)}
-                    aria-required="true"
-                  />
-                  <span className="text-sm leading-relaxed" style={{ color: '#555555' }}>
+                <label className="flex items-start gap-3 cursor-pointer">
+                  <span className="relative w-4 h-4 flex-shrink-0 mt-0.5">
+                    <span
+                      className={
+                        terms
+                          ? 'absolute inset-0 rounded flex items-center justify-center transition-all bg-[var(--accent)] border-[1.5px] border-[var(--accent)]'
+                          : 'absolute inset-0 rounded flex items-center justify-center transition-all bg-[#F3F4F6] border-[1.5px] border-[#D1D5DB]'
+                      }
+                      aria-hidden="true"
+                    >
+                      {terms && (
+                        <svg width="10" height="10" viewBox="0 0 10 10" fill="none">
+                          <path d="M2 5l2.5 2.5L8 3" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+                        </svg>
+                      )}
+                    </span>
+                    <input
+                      id="terms"
+                      type="checkbox"
+                      className="absolute inset-0 w-4 h-4 opacity-0 cursor-pointer"
+                      checked={terms}
+                      onChange={(e) => setTerms(e.target.checked)}
+                      aria-required="true"
+                    />
+                  </span>
+                  <span className="text-sm leading-relaxed text-[#555555]">
                     I agree to Aps&apos;s{' '}
                     <button
                       type="button"
-                      className="font-medium underline cursor-pointer"
-                      style={{ color: 'var(--accent)' }}
+                      className="font-medium underline cursor-pointer text-[var(--accent)]"
                     >
                       Terms & Conditions
                     </button>
                     {' '}and acknowledge the{' '}
                     <button
                       type="button"
-                      className="font-medium underline cursor-pointer"
-                      style={{ color: 'var(--accent)' }}
+                      className="font-medium underline cursor-pointer text-[var(--accent)]"
                     >
                       Privacy Policy
                     </button>
                   </span>
                 </label>
                 {errors.terms && (
-                  <p className="text-xs pl-7" style={{ color: '#EF4444' }}>
+                  <p className="text-xs pl-7 text-[#EF4444]">
                     {errors.terms}
                   </p>
                 )}
@@ -292,8 +289,7 @@ export default function LoginPage() {
                 variant="primary"
                 size="lg"
                 loading={loading}
-                className="w-full mt-1"
-                style={{ borderRadius: 9999 }}
+                className="w-full mt-1 rounded-full"
               >
                 {loading ? 'Creating account...' : 'Create account'}
               </Button>
@@ -301,9 +297,9 @@ export default function LoginPage() {
 
             {/* Divider */}
             <div className="flex items-center gap-3 my-5">
-              <div className="flex-1 h-px" style={{ backgroundColor: '#E5E7EB' }} />
-              <span className="text-xs" style={{ color: '#9CA3AF' }}>or continue with</span>
-              <div className="flex-1 h-px" style={{ backgroundColor: '#E5E7EB' }} />
+              <div className="flex-1 h-px bg-[#E5E7EB]" />
+              <span className="text-xs text-[#9CA3AF]">or continue with</span>
+              <div className="flex-1 h-px bg-[#E5E7EB]" />
             </div>
 
             {/* Social buttons */}
@@ -311,8 +307,7 @@ export default function LoginPage() {
               {/* Apple */}
               <button
                 type="button"
-                className="h-11 flex items-center justify-center rounded-xl transition-all hover:opacity-80 active:scale-[0.97] cursor-pointer"
-                style={{ backgroundColor: '#000', color: 'white', borderRadius: 9999 }}
+                className="h-11 flex items-center justify-center rounded-full transition-all hover:opacity-80 active:scale-[0.97] cursor-pointer bg-black text-white"
                 aria-label="Continue with Apple"
               >
                 <AppleIcon />
@@ -321,15 +316,8 @@ export default function LoginPage() {
               {/* Google */}
               <button
                 type="button"
-                className="h-11 flex items-center justify-center rounded-xl transition-all cursor-pointer"
-                style={{
-                  backgroundColor: '#FFFFFF',
-                  border: '1px solid #E5E7EB',
-                  borderRadius: 9999,
-                }}
+                className="h-11 flex items-center justify-center rounded-full transition-all cursor-pointer bg-[#f1e6e6ff] border border-[#E5E7EB] hover:bg-[#F9FAFB] active:scale-[0.97]"
                 aria-label="Continue with Google"
-                onMouseEnter={(e) => (e.currentTarget.style.backgroundColor = '#F9FAFB')}
-                onMouseLeave={(e) => (e.currentTarget.style.backgroundColor = '#FFFFFF')}
               >
                 <GoogleIcon />
               </button>
@@ -337,8 +325,7 @@ export default function LoginPage() {
               {/* Meta */}
               <button
                 type="button"
-                className="h-11 flex items-center justify-center rounded-xl transition-all hover:opacity-90 active:scale-[0.97] cursor-pointer"
-                style={{ backgroundColor: '#1877F2', color: 'white', borderRadius: 9999 }}
+                className="h-11 flex items-center justify-center rounded-full transition-all hover:opacity-90 active:scale-[0.97] cursor-pointer bg-[#1877F2] text-white"
                 aria-label="Continue with Meta"
               >
                 <MetaIcon />

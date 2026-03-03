@@ -11,36 +11,28 @@ interface FindingCardProps {
 function FindingCard({ finding }: FindingCardProps) {
   return (
     <div
-      className="p-4 rounded-[var(--radius-md)] flex flex-col gap-2 animate-fade-in"
-      style={{
-        backgroundColor: 'var(--bg-card)',
-        border: '1px solid var(--border-color)',
-      }}
+      className="p-4 rounded-[var(--radius-md)] flex flex-col gap-2 animate-fade-in bg-[var(--bg-card)] border border-[var(--border-color)]"
     >
       <div className="flex items-center justify-between gap-2">
         <SeverityBadge severity={finding.severity} size="md" />
         <span
-          className="text-xs font-mono flex-shrink-0"
-          style={{ color: 'var(--text-muted)' }}
+          className="text-xs font-mono flex-shrink-0 text-[var(--text-muted)]"
         >
           {finding.timestamp}
         </span>
       </div>
       <h3
-        className="text-sm font-semibold leading-snug"
-        style={{ color: 'var(--text-primary)' }}
+        className="text-sm font-semibold leading-snug text-[var(--text-primary)]"
       >
         {finding.title}
       </h3>
       <span
-        className="text-xs font-mono font-medium"
-        style={{ color: 'var(--accent)' }}
+        className="text-xs font-mono font-medium text-[var(--accent)]"
       >
         {finding.endpoint}
       </span>
       <p
-        className="text-xs leading-relaxed"
-        style={{ color: 'var(--text-secondary)' }}
+        className="text-xs leading-relaxed text-[var(--text-secondary)]"
       >
         {finding.description}
       </p>
@@ -55,18 +47,13 @@ interface FindingLogProps {
 export function FindingLog({ findings }: FindingLogProps) {
   return (
     <div
-      className="flex flex-col flex-1 min-h-0 rounded-[var(--radius-md)] overflow-hidden"
-      style={{
-        border: '1px solid var(--border-color)',
-        backgroundColor: 'var(--bg-card)',
-      }}
+      className="flex flex-col flex-1 min-h-0 rounded-[var(--radius-md)] overflow-hidden border border-[var(--border-color)] bg-[var(--bg-card)]"
     >
       {/* Header */}
       <div
-        className="px-4 py-3 flex-shrink-0"
-        style={{ borderBottom: '1px solid var(--border-color)' }}
+        className="px-4 py-3 flex-shrink-0 border-b border-[var(--border-color)]"
       >
-        <h2 className="text-sm font-semibold" style={{ color: 'var(--text-primary)' }}>
+        <h2 className="text-sm font-semibold text-[var(--text-primary)]">
           Finding Log
         </h2>
       </div>
@@ -85,11 +72,11 @@ export function FindingLog({ findings }: FindingLogProps) {
               fill="none"
               stroke="currentColor"
               strokeWidth="1.5"
-              style={{ color: 'var(--text-muted)' }}
+              className="text-[var(--text-muted)]"
             >
               <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
             </svg>
-            <p className="text-xs" style={{ color: 'var(--text-muted)' }}>
+            <p className="text-xs text-[var(--text-muted)]">
               No findings yet
             </p>
           </div>

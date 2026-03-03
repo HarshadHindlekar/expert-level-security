@@ -27,15 +27,11 @@ const TrendDownIcon = () => (
 export function TopStatsCard({ label, count, change, trend, icon, color, colorBg }: TopStatsCardProps) {
   return (
     <div
-      className="flex flex-col gap-3 py-5 px-6"
-      style={{
-        borderRight: '1px solid var(--border-color)',
-        borderBottom: '1px solid var(--border-color)',
-      }}
+      className="flex flex-col gap-3 py-5 px-6 border-r border-b border-[var(--border-color)]"
     >
       {/* Top row: label + icon */}
       <div className="flex items-center justify-between">
-        <span className="text-xs font-medium uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+        <span className="text-xs font-medium uppercase tracking-widest text-[var(--text-muted)]">
           {label}
         </span>
         <div
@@ -49,8 +45,7 @@ export function TopStatsCard({ label, count, change, trend, icon, color, colorBg
 
       {/* Count */}
       <span
-        className="text-4xl font-bold tabular-nums leading-none"
-        style={{ color: 'var(--text-primary)' }}
+        className="text-4xl font-bold tabular-nums leading-none text-[var(--text-primary)]"
       >
         {count}
       </span>
@@ -67,7 +62,7 @@ export function TopStatsCard({ label, count, change, trend, icon, color, colorBg
           {trend === 'up' ? <TrendUpIcon /> : <TrendDownIcon />}
           {change}
         </span>
-        <span className="text-[11px]" style={{ color: 'var(--text-muted)' }}>
+        <span className="text-[11px] text-[var(--text-muted)]">
           vs yesterday
         </span>
       </div>
@@ -104,36 +99,27 @@ export function DashboardMetaBar({ org, owner, totalScans, scheduled, rescans, f
 
   return (
     <div
-      className="flex items-center overflow-x-auto no-scrollbar"
-      style={{
-        borderBottom: '1px solid var(--border-color)',
-        minHeight: '40px',
-        paddingLeft: '20px',
-        paddingRight: '20px',
-        paddingTop: '10px',
-        paddingBottom: '10px',
-      }}
+      className="flex items-center overflow-x-auto no-scrollbar border-b border-[var(--border-color)] min-h-10 px-5 py-2.5"
     >
       {items.map((item, i) => (
         <React.Fragment key={item.label}>
           {i > 0 && (
             <span
-              className="w-px h-3 flex-shrink-0 mx-4"
-              style={{ backgroundColor: 'var(--border-color)' }}
+              className="w-px h-3 flex-shrink-0 mx-4 bg-[var(--border-color)]"
               aria-hidden="true"
             />
           )}
           <div className="flex items-center gap-1.5 flex-shrink-0">
-            <span className="text-xs whitespace-nowrap" style={{ color: 'var(--text-muted)' }}>{item.label}</span>
-            <span className="text-xs font-semibold whitespace-nowrap" style={{ color: 'var(--text-primary)' }}>{item.value}</span>
+            <span className="text-xs whitespace-nowrap text-[var(--text-muted)]">{item.label}</span>
+            <span className="text-xs font-semibold whitespace-nowrap text-[var(--text-primary)]">{item.value}</span>
           </div>
         </React.Fragment>
       ))}
       <div className="flex items-center gap-1.5 ml-auto pl-6 flex-shrink-0">
-        <span style={{ color: 'var(--accent)' }} aria-hidden="true">
+        <span className="text-[var(--accent)]" aria-hidden="true">
           <ClockIcon />
         </span>
-        <span className="text-xs whitespace-nowrap" style={{ color: 'var(--text-muted)' }}>{lastUpdated}</span>
+        <span className="text-xs whitespace-nowrap text-[var(--text-muted)]">{lastUpdated}</span>
       </div>
     </div>
   );

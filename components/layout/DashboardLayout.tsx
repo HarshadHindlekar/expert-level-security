@@ -17,16 +17,12 @@ interface DashboardLayoutProps {
 
 export function DashboardLayout({ children, breadcrumbs, topBarActions }: DashboardLayoutProps) {
   return (
-    <div
-      className="flex h-screen overflow-hidden"
-      style={{ backgroundColor: 'var(--bg-primary)' }}
-    >
+    <div className="flex h-screen overflow-hidden bg-[var(--bg-primary)]">
       <Sidebar />
       <div className="flex flex-col flex-1 min-w-0 overflow-hidden">
         <TopBar breadcrumbs={breadcrumbs} actions={topBarActions} />
         <main
-          className="flex-1 overflow-hidden flex flex-col"
-          style={{ backgroundColor: 'var(--bg-primary)' }}
+          className="flex-1 overflow-hidden flex flex-col bg-[var(--bg-primary)]"
         >
           {children}
         </main>

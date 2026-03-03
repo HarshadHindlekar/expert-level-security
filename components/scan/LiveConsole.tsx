@@ -72,28 +72,28 @@ function highlightLog(message: string): React.ReactNode[] {
     switch (match.type) {
       case 'url':
         parts.push(
-          <span key={i} style={{ color: 'var(--accent)', textDecoration: 'underline', cursor: 'pointer' }}>
+          <span key={i} className="text-[var(--accent)] underline cursor-pointer">
             {match.content}
           </span>
         );
         break;
       case 'path':
         parts.push(
-          <span key={i} className="px-1 rounded text-xs" style={{ backgroundColor: 'rgba(12,200,168,0.15)', color: 'var(--accent)', fontFamily: 'monospace' }}>
+          <span key={i} className="px-1 rounded text-xs bg-[rgba(12,200,168,0.15)] text-[var(--accent)] font-mono">
             {match.content}
           </span>
         );
         break;
       case 'keyword':
         parts.push(
-          <span key={i} style={{ color: '#F97316', fontWeight: 600 }}>
+          <span key={i} className="text-[#F97316] font-semibold">
             {match.content}
           </span>
         );
         break;
       case 'code':
         parts.push(
-          <span key={i} className="px-1 rounded" style={{ backgroundColor: 'rgba(255,255,255,0.08)', color: '#E5C07B', fontFamily: 'monospace', fontSize: '0.85em' }}>
+          <span key={i} className="px-1 rounded bg-[rgba(255,255,255,0.08)] text-[#E5C07B] font-mono text-[0.85em]">
             {match.content}
           </span>
         );
@@ -118,8 +118,7 @@ function ActivityLog({ logs }: { logs: ConsoleLogEntry[] }) {
 
   return (
     <div
-      className="flex-1 overflow-y-auto p-4 font-mono text-xs leading-relaxed space-y-3 scrollbar-thin"
-      style={{ backgroundColor: '#111', color: '#d4d4d4' }}
+      className="flex-1 overflow-y-auto p-4 font-mono text-xs leading-relaxed space-y-3 scrollbar-thin bg-[#111] text-[#d4d4d4]"
       role="log"
       aria-live="polite"
       aria-label="Activity log"
@@ -131,20 +130,19 @@ function ActivityLog({ logs }: { logs: ConsoleLogEntry[] }) {
           style={{ animationDelay: `${index * 0.05}s` }}
         >
           <span
-            className="flex-shrink-0 font-semibold"
-            style={{ color: '#6B7280', minWidth: '70px' }}
+            className="flex-shrink-0 font-semibold text-[#6B7280] min-w-[70px]"
           >
             [{log.timestamp}]
           </span>
           <span className="flex-1 break-all whitespace-pre-wrap leading-relaxed">
             {log.type === 'code' ? (
-              <span style={{ color: '#9CA3AF' }}>{highlightLog(log.message)}</span>
+              <span className="text-[#9CA3AF]">{highlightLog(log.message)}</span>
             ) : log.type === 'error' ? (
-              <span style={{ color: '#F87171' }}>{highlightLog(log.message)}</span>
+              <span className="text-[#F87171]">{highlightLog(log.message)}</span>
             ) : log.type === 'warning' ? (
-              <span style={{ color: '#FBBF24' }}>{highlightLog(log.message)}</span>
+              <span className="text-[#FBBF24]">{highlightLog(log.message)}</span>
             ) : log.type === 'success' ? (
-              <span style={{ color: '#6EE7B7' }}>{highlightLog(log.message)}</span>
+              <span className="text-[#6EE7B7]">{highlightLog(log.message)}</span>
             ) : (
               highlightLog(log.message)
             )}
@@ -165,16 +163,14 @@ function VerificationLoops({ loops }: { loops: VerificationLoop[] }) {
 
   return (
     <div
-      className="flex-1 overflow-y-auto p-4 space-y-2"
-      style={{ backgroundColor: '#111' }}
+      className="flex-1 overflow-y-auto p-4 space-y-2 bg-[#111]"
       role="list"
       aria-label="Verification loops"
     >
       {loops.map((loop) => (
         <div
           key={loop.id}
-          className="flex items-center justify-between p-3 rounded-lg font-mono text-xs"
-          style={{ backgroundColor: '#1a1a1a', border: '1px solid #2a2a2a' }}
+          className="flex items-center justify-between p-3 rounded-lg font-mono text-xs bg-[#1a1a1a] border border-[#2a2a2a]"
           role="listitem"
         >
           <div className="flex items-center gap-3">
@@ -184,16 +180,16 @@ function VerificationLoops({ loops }: { loops: VerificationLoop[] }) {
               aria-hidden="true"
             />
             <div>
-              <span style={{ color: '#9CA3AF' }}>{loop.loopId}</span>
-              <span className="mx-2" style={{ color: '#4B5563' }}>→</span>
-              <span style={{ color: 'var(--accent)' }}>{loop.target}</span>
+              <span className="text-[#9CA3AF]">{loop.loopId}</span>
+              <span className="mx-2 text-[#4B5563]">→</span>
+              <span className="text-[var(--accent)]">{loop.target}</span>
             </div>
           </div>
           <div className="flex items-center gap-4">
-            <span style={{ color: '#6B7280' }}>
+            <span className="text-[#6B7280]">
               {loop.iterations} iteration{loop.iterations !== 1 ? 's' : ''}
             </span>
-            <span style={{ color: '#4B5563' }}>{loop.timestamp}</span>
+            <span className="text-[#4B5563]">{loop.timestamp}</span>
             <span
               className="capitalize font-semibold"
               style={{ color: statusColors[loop.status] }}
@@ -212,33 +208,25 @@ export function LiveConsole({ logs, verificationLoops }: LiveConsoleProps) {
 
   return (
     <div
-      className="flex flex-col flex-1 min-h-0 rounded-[var(--radius-md)] overflow-hidden"
-      style={{
-        border: '1px solid var(--border-color)',
-        backgroundColor: '#111',
-      }}
+      className="flex flex-col flex-1 min-h-0 rounded-[var(--radius-md)] overflow-hidden border border-[var(--border-color)] bg-[#111]"
     >
       {/* Console header */}
       <div
-        className="flex items-center justify-between px-4 py-2.5 flex-shrink-0"
-        style={{ borderBottom: '1px solid #1f1f1f', backgroundColor: '#161616' }}
+        className="flex items-center justify-between px-4 py-2.5 flex-shrink-0 border-b border-[#1f1f1f] bg-[#161616]"
       >
         <div className="flex items-center gap-2">
           <span
-            className="w-2 h-2 rounded-full animate-pulse"
-            style={{ backgroundColor: 'var(--accent)' }}
+            className="w-2 h-2 rounded-full animate-pulse bg-[var(--accent)]"
             aria-hidden="true"
           />
-          <span className="text-sm font-semibold" style={{ color: '#f0f0f0' }}>
+          <span className="text-sm font-semibold text-[#f0f0f0]">
             Live Scan Console
           </span>
           <span
-            className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium ml-1"
-            style={{ backgroundColor: 'rgba(12,200,168,0.15)', color: 'var(--accent)' }}
+            className="flex items-center gap-1.5 px-2 py-0.5 rounded-full text-xs font-medium ml-1 bg-[rgba(12,200,168,0.15)] text-[var(--accent)]"
           >
             <span
-              className="w-1.5 h-1.5 rounded-full animate-pulse"
-              style={{ backgroundColor: 'var(--accent)' }}
+              className="w-1.5 h-1.5 rounded-full animate-pulse bg-[var(--accent)]"
               aria-hidden="true"
             />
             Running...
@@ -246,8 +234,7 @@ export function LiveConsole({ logs, verificationLoops }: LiveConsoleProps) {
         </div>
         <div className="flex items-center gap-1">
           <button
-            className="w-6 h-6 rounded flex items-center justify-center transition-colors hover:bg-white/10 cursor-pointer"
-            style={{ color: '#6B7280' }}
+            className="w-6 h-6 rounded flex items-center justify-center transition-colors hover:bg-white/10 cursor-pointer text-[#6B7280]"
             aria-label="Minimize console"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -255,8 +242,7 @@ export function LiveConsole({ logs, verificationLoops }: LiveConsoleProps) {
             </svg>
           </button>
           <button
-            className="w-6 h-6 rounded flex items-center justify-center transition-colors hover:bg-white/10 cursor-pointer"
-            style={{ color: '#6B7280' }}
+            className="w-6 h-6 rounded flex items-center justify-center transition-colors hover:bg-white/10 cursor-pointer text-[#6B7280]"
             aria-label="Close console"
           >
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -269,8 +255,7 @@ export function LiveConsole({ logs, verificationLoops }: LiveConsoleProps) {
 
       {/* Tabs */}
       <div
-        className="flex px-4 gap-4 flex-shrink-0"
-        style={{ borderBottom: '1px solid #1f1f1f', backgroundColor: '#161616' }}
+        className="flex px-4 gap-4 flex-shrink-0 border-b border-[#1f1f1f] bg-[#161616]"
         role="tablist"
       >
         {[
@@ -282,11 +267,11 @@ export function LiveConsole({ logs, verificationLoops }: LiveConsoleProps) {
             role="tab"
             aria-selected={activeTab === tab.id}
             onClick={() => setActiveTab(tab.id)}
-            className="py-2.5 text-xs font-medium border-b-2 transition-colors cursor-pointer -mb-px"
-            style={{
-              borderBottomColor: activeTab === tab.id ? 'var(--accent)' : 'transparent',
-              color: activeTab === tab.id ? 'var(--accent)' : '#6B7280',
-            }}
+            className={
+              activeTab === tab.id
+                ? 'py-2.5 text-xs font-medium border-b-2 transition-colors cursor-pointer -mb-px border-b-[var(--accent)] text-[var(--accent)]'
+                : 'py-2.5 text-xs font-medium border-b-2 transition-colors cursor-pointer -mb-px border-b-transparent text-[#6B7280]'
+            }
           >
             {tab.label}
           </button>

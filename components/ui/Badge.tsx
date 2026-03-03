@@ -59,8 +59,8 @@ interface BadgeProps {
 export function Badge({ children, color, bg, className = '' }: BadgeProps) {
   return (
     <span
-      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium ${className}`}
-      style={{ color: color ?? 'var(--text-secondary)', backgroundColor: bg ?? 'var(--bg-hover)' }}
+      className={`inline-flex items-center gap-1 px-2 py-0.5 rounded text-xs font-medium text-[var(--text-secondary)] bg-[var(--bg-hover)] ${className}`}
+      style={color || bg ? { color: color ?? undefined, backgroundColor: bg ?? undefined } : undefined}
     >
       {children}
     </span>

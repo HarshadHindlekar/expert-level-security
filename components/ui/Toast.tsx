@@ -54,32 +54,26 @@ function ToastItem({ item, onRemove }: { item: ToastItem; onRemove: (id: string)
     return () => clearTimeout(t);
   }, [item.id, item.duration, onRemove]);
 
-  const borderColors: Record<ToastType, string> = {
-    success: 'var(--severity-low)',
-    error: 'var(--severity-critical)',
-    info: 'var(--accent)',
-    warning: 'var(--severity-medium)',
+  const borderLeftClasses: Record<ToastType, string> = {
+    success: 'border-l-[var(--severity-low)]',
+    error: 'border-l-[var(--severity-critical)]',
+    info: 'border-l-[var(--accent)]',
+    warning: 'border-l-[var(--severity-medium)]',
   };
 
   return (
     <div
-      className="flex items-start gap-3 px-4 py-3 rounded-[var(--radius-md)] shadow-[var(--shadow-lg)] animate-toast-in min-w-[280px] max-w-sm"
-      style={{
-        backgroundColor: 'var(--bg-card)',
-        border: `1px solid var(--border-color)`,
-        borderLeft: `3px solid ${borderColors[item.type]}`,
-      }}
+      className={`flex items-start gap-3 px-4 py-3 rounded-[var(--radius-md)] shadow-[var(--shadow-lg)] animate-toast-in min-w-[280px] max-w-sm bg-[var(--bg-card)] border border-[var(--border-color)] border-l-[3px] ${borderLeftClasses[item.type]}`}
       role="alert"
       aria-live="polite"
     >
       <span className="flex-shrink-0 mt-0.5">{icons[item.type]}</span>
-      <p className="text-sm flex-1" style={{ color: 'var(--text-primary)' }}>
+      <p className="text-sm flex-1 text-[var(--text-primary)]">
         {item.message}
       </p>
       <button
         onClick={() => onRemove(item.id)}
-        className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded transition-colors hover:bg-[var(--bg-hover)] cursor-pointer"
-        style={{ color: 'var(--text-muted)' }}
+        className="flex-shrink-0 w-5 h-5 flex items-center justify-center rounded transition-colors hover:bg-[var(--bg-hover)] cursor-pointer text-[var(--text-muted)]"
         aria-label="Dismiss notification"
       >
         <svg width="10" height="10" viewBox="0 0 10 10" fill="none">

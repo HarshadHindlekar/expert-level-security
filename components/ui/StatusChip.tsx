@@ -22,8 +22,7 @@ export function StatusChip({ status, size = 'sm' }: StatusChipProps) {
       aria-label={`Status: ${status}`}
     >
       <span
-        className="w-1.5 h-1.5 rounded-full flex-shrink-0"
-        style={{ backgroundColor: color }}
+        className="w-1.5 h-1.5 rounded-full flex-shrink-0 bg-current"
         aria-hidden="true"
       />
       {status}

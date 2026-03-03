@@ -156,7 +156,7 @@ function DashboardContent() {
       ]}
       topBarActions={topBarActions}
     >
-      <div className="flex flex-col flex-1 min-h-0 overflow-hidden" style={{ backgroundColor: 'var(--bg-card)' }}>
+      <div className="flex flex-col flex-1 min-h-0 overflow-hidden bg-[var(--bg-card)]">
         {/* Meta bar */}
         <DashboardMetaBar
           org={dashboardStats.org}
@@ -210,14 +210,12 @@ function DashboardContent() {
 
         {/* Toolbar */}
         <div
-          className="flex items-center gap-3 px-6 py-3"
-          style={{ borderBottom: '1px solid var(--border-color)' }}
+          className="flex items-center gap-3 px-6 py-3 border-b border-[var(--border-color)]"
         >
           {/* Search */}
           <div className="flex-1 min-w-0 max-w-sm relative">
             <span
-              className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none"
-              style={{ color: 'var(--text-muted)' }}
+              className="absolute left-3 top-1/2 -translate-y-1/2 pointer-events-none text-[var(--text-muted)]"
               aria-hidden="true"
             >
               <SearchIcon />
@@ -227,12 +225,7 @@ function DashboardContent() {
               placeholder="Search scans by name or type..."
               value={search}
               onChange={(e) => setSearch(e.target.value)}
-              className="w-full h-9 pl-9 pr-4 text-sm rounded-[var(--radius-sm)] transition-all duration-150 focus:outline-none"
-              style={{
-                backgroundColor: 'var(--bg-input)',
-                color: 'var(--text-primary)',
-                border: '1px solid var(--border-color)',
-              }}
+              className="w-full h-9 pl-9 pr-4 text-sm rounded-[var(--radius-sm)] transition-all duration-150 focus:outline-none bg-[var(--bg-input)] text-[var(--text-primary)] border border-[var(--border-color)]"
               aria-label="Search scans"
             />
           </div>
@@ -241,20 +234,18 @@ function DashboardContent() {
             {/* Filter button */}
             <button
               onClick={() => setFilterModalOpen(true)}
-              className="h-8 px-3 flex items-center gap-1.5 text-xs font-medium rounded-[var(--radius-sm)] transition-colors hover:bg-[var(--bg-hover)] cursor-pointer"
-              style={{
-                color: activeFiltersCount > 0 ? 'var(--accent)' : 'var(--text-secondary)',
-                border: `1px solid ${activeFiltersCount > 0 ? 'var(--accent)' : 'var(--border-color)'}`,
-                backgroundColor: activeFiltersCount > 0 ? 'var(--accent-light)' : 'transparent',
-              }}
+              className={
+                activeFiltersCount > 0
+                  ? 'h-8 px-3 flex items-center gap-1.5 text-xs font-medium rounded-[var(--radius-sm)] transition-colors hover:bg-[var(--bg-hover)] cursor-pointer text-[var(--accent)] border border-[var(--accent)] bg-[var(--accent-light)]'
+                  : 'h-8 px-3 flex items-center gap-1.5 text-xs font-medium rounded-[var(--radius-sm)] transition-colors hover:bg-[var(--bg-hover)] cursor-pointer text-[var(--text-secondary)] border border-[var(--border-color)] bg-transparent'
+              }
               aria-label={`Filter scans${activeFiltersCount > 0 ? `, ${activeFiltersCount} active` : ''}`}
             >
               <FilterIcon />
               <span>Filter</span>
               {activeFiltersCount > 0 && (
                 <span
-                  className="min-w-[16px] h-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center"
-                  style={{ backgroundColor: 'var(--accent)', color: 'white' }}
+                  className="min-w-[16px] h-4 px-1 rounded-full text-[10px] font-bold flex items-center justify-center bg-[var(--accent)] text-white"
                 >
                   {activeFiltersCount}
                 </span>
@@ -263,12 +254,7 @@ function DashboardContent() {
 
             {/* Column button */}
             <button
-              className="h-8 px-3 flex items-center gap-1.5 text-xs font-medium rounded-[var(--radius-sm)] transition-colors hover:bg-[var(--bg-hover)] cursor-pointer"
-              style={{
-                color: 'var(--text-secondary)',
-                border: '1px solid var(--border-color)',
-                backgroundColor: 'transparent',
-              }}
+              className="h-8 px-3 flex items-center gap-1.5 text-xs font-medium rounded-[var(--radius-sm)] transition-colors hover:bg-[var(--bg-hover)] cursor-pointer text-[var(--text-secondary)] border border-[var(--border-color)] bg-transparent"
               aria-label="Column settings"
             >
               <ColumnIcon />
@@ -288,7 +274,7 @@ function DashboardContent() {
         </div>
 
         {/* Table */}
-        <div className="flex-1 overflow-y-auto" style={{ backgroundColor: 'var(--bg-card)' }}>
+        <div className="flex-1 overflow-y-auto bg-[var(--bg-card)]">
           <ScanTable scans={filteredScans} />
         </div>
       </div>

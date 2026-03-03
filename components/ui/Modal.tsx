@@ -47,8 +47,7 @@ export function Modal({ open, onClose, title, children, size = 'md', footer }: M
   return (
     <div
       ref={overlayRef}
-      className="fixed inset-0 z-50 flex items-center justify-center p-4"
-      style={{ backgroundColor: 'rgba(0,0,0,0.6)', backdropFilter: 'blur(4px)' }}
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-sm"
       onClick={handleOverlayClick}
       role="dialog"
       aria-modal="true"
@@ -57,25 +56,21 @@ export function Modal({ open, onClose, title, children, size = 'md', footer }: M
       <div
         ref={contentRef}
         tabIndex={-1}
-        className={`w-full ${sizeClasses[size]} rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] animate-fade-in outline-none`}
-        style={{ backgroundColor: 'var(--bg-card)', border: '1px solid var(--border-color)' }}
+        className={`w-full ${sizeClasses[size]} rounded-[var(--radius-lg)] shadow-[var(--shadow-lg)] animate-fade-in outline-none bg-[var(--bg-card)] border border-[var(--border-color)]`}
       >
         {title && (
           <div
-            className="flex items-center justify-between px-6 py-4"
-            style={{ borderBottom: '1px solid var(--border-color)' }}
+            className="flex items-center justify-between px-6 py-4 border-b border-[var(--border-color)]"
           >
             <h2
               id="modal-title"
-              className="text-base font-semibold"
-              style={{ color: 'var(--text-primary)' }}
+              className="text-base font-semibold text-[var(--text-primary)]"
             >
               {title}
             </h2>
             <button
               onClick={onClose}
-              className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-[var(--bg-hover)] cursor-pointer"
-              style={{ color: 'var(--text-muted)' }}
+              className="w-7 h-7 rounded-md flex items-center justify-center transition-colors hover:bg-[var(--bg-hover)] cursor-pointer text-[var(--text-muted)]"
               aria-label="Close modal"
             >
               <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
@@ -87,8 +82,7 @@ export function Modal({ open, onClose, title, children, size = 'md', footer }: M
         <div className="px-6 py-4">{children}</div>
         {footer && (
           <div
-            className="flex items-center justify-end gap-3 px-6 py-4"
-            style={{ borderTop: '1px solid var(--border-color)' }}
+            className="flex items-center justify-end gap-3 px-6 py-4 border-t border-[var(--border-color)]"
           >
             {footer}
           </div>

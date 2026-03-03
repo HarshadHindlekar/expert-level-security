@@ -111,25 +111,24 @@ function NavLink({ item, isCollapsed }: { item: NavItem; isCollapsed: boolean })
       className={cn(
         'relative flex items-center gap-3 px-3 py-2 rounded-[var(--radius-sm)] transition-all duration-150 group',
         'focus:outline-none focus-visible:ring-2 focus-visible:ring-[var(--accent)]',
-        active ? 'font-semibold' : 'font-normal hover:bg-[var(--bg-hover)]'
+        active
+          ? 'font-semibold text-[var(--accent)] bg-[var(--accent-light)]'
+          : 'font-normal text-[var(--text-secondary)] hover:bg-[var(--bg-hover)]'
       )}
-      style={{
-        color: active ? 'var(--accent)' : 'var(--text-secondary)',
-        backgroundColor: active ? 'var(--accent-light)' : undefined,
-      }}
       aria-current={active ? 'page' : undefined}
       title={isCollapsed ? item.label : undefined}
     >
       {active && (
         <span
-          className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-r"
-          style={{ backgroundColor: 'var(--accent)' }}
+          className="absolute left-0 top-1/2 -translate-y-1/2 w-0.5 h-5 rounded-r bg-[var(--accent)]"
           aria-hidden="true"
         />
       )}
       <span
-        className="flex-shrink-0 transition-colors w-5 h-5 flex items-center justify-center"
-        style={{ color: active ? 'var(--accent)' : 'var(--text-muted)' }}
+        className={cn(
+          'flex-shrink-0 transition-colors w-5 h-5 flex items-center justify-center',
+          active ? 'text-[var(--accent)]' : 'text-[var(--text-muted)]'
+        )}
       >
         {item.icon}
       </span>
@@ -147,8 +146,7 @@ export function Sidebar() {
     <>
       {/* Mobile toggle */}
       <button
-        className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-[var(--radius-sm)] shadow-[var(--shadow-md)] transition-colors cursor-pointer"
-        style={{ backgroundColor: 'var(--bg-card)', color: 'var(--text-primary)', border: '1px solid var(--border-color)' }}
+        className="md:hidden fixed top-4 left-4 z-50 w-9 h-9 flex items-center justify-center rounded-[var(--radius-sm)] shadow-[var(--shadow-md)] transition-colors cursor-pointer bg-[var(--bg-card)] text-[var(--text-primary)] border border-[var(--border-color)]"
         onClick={() => setMobileOpen((v) => !v)}
         aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
         aria-expanded={mobileOpen}
@@ -170,24 +168,17 @@ export function Sidebar() {
         className={cn(
           'fixed top-0 left-0 h-full z-40 flex flex-col transition-transform duration-300 ease-in-out',
           'md:relative md:translate-x-0',
-          mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0'
+          mobileOpen ? 'translate-x-0' : '-translate-x-full md:translate-x-0',
+          'w-[240px] min-w-[240px] bg-[var(--bg-sidebar)] border-r border-[var(--border-color)]'
         )}
-        style={{
-          width: '240px',
-          minWidth: '240px',
-          backgroundColor: 'var(--bg-sidebar)',
-          borderRight: '1px solid var(--border-color)',
-        }}
         aria-label="Main navigation"
       >
         {/* Logo */}
         <div
-          className="flex items-center gap-3 px-5 flex-shrink-0"
-          style={{ height: '56px', borderBottom: '1px solid var(--border-color)' }}
+          className="flex items-center gap-3 px-5 flex-shrink-0 h-14 border-b border-[var(--border-color)]"
         >
           <div
-            className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0"
-            style={{ backgroundColor: 'var(--accent)' }}
+            className="w-8 h-8 rounded-lg flex items-center justify-center flex-shrink-0 bg-[var(--accent)]"
             aria-hidden="true"
           >
             <svg width="15" height="15" viewBox="0 0 14 14" fill="none">
@@ -195,14 +186,14 @@ export function Sidebar() {
             </svg>
           </div>
           <div className="flex flex-col leading-none">
-            <span className="text-sm font-bold tracking-tight" style={{ color: 'var(--text-primary)' }}>APS Security</span>
-            <span className="text-[10px] mt-0.5" style={{ color: 'var(--text-muted)' }}>Pentest Platform</span>
+            <span className="text-sm font-bold tracking-tight text-[var(--text-primary)]">APS Security</span>
+            <span className="text-[10px] mt-0.5 text-[var(--text-muted)]">Pentest Platform</span>
           </div>
         </div>
 
         {/* Primary nav */}
         <nav className="flex-1 px-3 py-4 overflow-y-auto no-scrollbar">
-          <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+          <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest text-[var(--text-muted)]">
             Main
           </p>
           <div className="flex flex-col gap-0.5 mb-5">
@@ -211,7 +202,7 @@ export function Sidebar() {
             ))}
           </div>
 
-          <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest" style={{ color: 'var(--text-muted)' }}>
+          <p className="px-3 mb-2 text-[10px] font-semibold uppercase tracking-widest text-[var(--text-muted)]">
             System
           </p>
           <div className="flex flex-col gap-0.5">
@@ -223,8 +214,7 @@ export function Sidebar() {
 
         {/* User profile */}
         <div
-          className="flex-shrink-0 px-3 pb-3"
-          style={{ borderTop: '1px solid var(--border-color)' }}
+          className="flex-shrink-0 px-3 pb-3 border-t border-[var(--border-color)]"
         >
           <div
             className="flex items-center gap-3 px-3 py-3 mt-3 rounded-[var(--radius-md)] cursor-pointer transition-colors hover:bg-[var(--bg-hover)]"
@@ -233,21 +223,20 @@ export function Sidebar() {
             aria-label="User profile"
           >
             <div
-              className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-white"
-              style={{ background: 'linear-gradient(135deg, #4B6A8A 0%, #2D4A6A 100%)' }}
+              className="w-9 h-9 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold text-white bg-[linear-gradient(135deg,#4B6A8A_0%,#2D4A6A_100%)]"
               aria-hidden="true"
             >
               A
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-xs font-semibold truncate" style={{ color: 'var(--text-primary)' }}>
+              <p className="text-xs font-semibold truncate text-[var(--text-primary)]">
                 admin@edu.com
               </p>
-              <p className="text-[11px] truncate mt-0.5" style={{ color: 'var(--text-muted)' }}>
+              <p className="text-[11px] truncate mt-0.5 text-[var(--text-muted)]">
                 Security Lead
               </p>
             </div>
-            <span style={{ color: 'var(--text-muted)' }} aria-hidden="true">
+            <span className="text-[var(--text-muted)]" aria-hidden="true">
               <ChevronRightIcon />
             </span>
           </div>

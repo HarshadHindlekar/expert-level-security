@@ -33,7 +33,7 @@ export function CircularProgress({
         width={size}
         height={size}
         viewBox={`0 0 ${size} ${size}`}
-        style={{ transform: 'rotate(-90deg)' }}
+        className="-rotate-90"
       >
         <circle
           cx={center}
@@ -53,7 +53,7 @@ export function CircularProgress({
           strokeLinecap="round"
           strokeDasharray={circumference}
           strokeDashoffset={offset}
-          style={{ transition: 'stroke-dashoffset 0.6s cubic-bezier(0.4, 0, 0.2, 1)' }}
+          className="transition-[stroke-dashoffset] duration-[600ms] ease-[cubic-bezier(0.4,0,0.2,1)]"
         />
       </svg>
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center">
